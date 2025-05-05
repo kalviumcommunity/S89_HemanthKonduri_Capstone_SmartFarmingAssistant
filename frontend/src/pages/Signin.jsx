@@ -26,7 +26,7 @@ e.preventDefault(); // Prevent the default form submission behavior
         localStorage.setItem('authToken', response.data.token);
         alert("Signed in successfully!");
         // Redirect to homepage or dashboard
-        window.location.href = '/homepage';
+        navigate('/homepage');
       } else {
         setErrorMessage(response.data.message);
       }
