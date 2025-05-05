@@ -7,9 +7,7 @@ const User = require("../models/User");
 
 const signup = async (req, res) => {
   const { name, email, password } = req.body;
-  if (!name || !email || !password) {
-    return res.status(400).json({ success: false, message: 'All fields are required.' });
-  }
+  
   
   try {
   
@@ -62,9 +60,7 @@ const signup = async (req, res) => {
 
 const signin = async (req, res) => {
   const { email, password } = req.body;
-  if (!email || !password) {
-    return res.status(400).json({ success: false, message: 'All fields are required.' });
-  }
+ 
   try {
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return res.status(400).json({ success: false, message: "Invalid email format" });
@@ -101,4 +97,22 @@ const signin = async (req, res) => {
   }
 };
 
-module.exports = { signup, signin };
+const getUser = async (req, res) => {
+    const userId = req.params.id;
+    try {
+      if (!mongoose.isValidObjectId(userId)) {
+        return res.status(400).json({ success: false, message: "Invalid user ID" });
+      }
+      const user = await User.findById(userId).select("-password");
+      if (!user) {
+        return res.status(404).json({ success: false, message: "User not found" });
+      }
+      res.status(200).json({ success: true, user });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ success: false, message: "Internal server error" });
+    }
+  };
+  
+
+module.exports = { signup, signin, getUser};

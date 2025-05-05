@@ -4,7 +4,7 @@ const dotenv = require("dotenv");
 
 const router = require("./routes/authRoute");
 const cors = require("cors");
- // <-- Added this for Gemini API
+
 
 dotenv.config();
 
