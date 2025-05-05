@@ -12,7 +12,7 @@ const Signup = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
   const handleBack =()=>{
-    navigate("/landingpage")
+    navigate("/")
   }
 
   const handleChange = (e) => {

@@ -10,7 +10,7 @@ const Signin = () => {
 
   const navigate = useNavigate();
   const handleBack = () => {
-    navigate("/landingpage")
+    navigate("/")
   };
 
   const handleSignin = async (e) => {
@@ -53,10 +53,10 @@ e.preventDefault(); // Prevent the default form submission behavior
           </form>
       </div>
       <div className="signin-right">
-      <div className="image-grid">
+     
           <img src="https://media.istockphoto.com/id/637583458/photo/hands-holding-and-caring-a-green-young-plant.jpg?s=612x612&w=0&k=20&c=vayQ471oZW7dTCeDJos5h4wH7SZqL4cbD-F-pZxj114=" id="plant-in-hand" alt="Plant in Hand" />
           
-        </div>
+        
       </div>
       </div>
    

@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import './Landingpage.css'; 
 import React from 'react';
-import backgroundimg from '../assets/background.jpg'; // Adjust the path as necessary
+import backgroundimg from '../assets/backgroundimg.png'; // Adjust the path as necessary
 
 const Landingpage = () => {
   const navigate = useNavigate();
