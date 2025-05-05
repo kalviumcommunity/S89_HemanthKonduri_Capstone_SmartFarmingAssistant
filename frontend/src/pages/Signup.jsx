@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./Signup.css";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -9,7 +10,10 @@ const Signup = () => {
     password: "",
   });
   const [errorMessage, setErrorMessage] = useState("");
-
+  const navigate = useNavigate();
+  const handleBack =()=>{
+    navigate("/landingpage")
+  }
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -43,7 +47,7 @@ const Signup = () => {
   return (
     <div className="signup-container">
       <div className="signup-left">
-        <div className="back-arrow">←</div>
+        <div className="back-arrow" onClick={handleBack}>←</div>
         <form className="signup-form-box" onSubmit={handleSignup}>
           <h2 className="signup-title">Sign up</h2>
           {errorMessage && <div className="error-message">{errorMessage}</div>}

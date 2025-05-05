@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './Signin.css'; 
+import { useNavigate } from 'react-router-dom';
 
 const Signin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+
+  const navigate = useNavigate();
+  const handleBack = () => {
+    navigate("/landingpage")
+  };
 
   const handleSignin = async (e) => {
 e.preventDefault(); // Prevent the default form submission behavior
@@ -34,15 +40,15 @@ e.preventDefault(); // Prevent the default form submission behavior
     <>
     <div className="signin-container">
       <div className="signin-grid">
-        <div className="back-arrow">←</div>
-       <form action="" className="signin-form-box" >
+        <div className="back-arrow" onClick={handleBack}>←</div>
+       <form action="" className="signin-form-box"  onSubmit={handleSignin}>
           <h2 className="signin-title">Sign In</h2>
           {errorMessage && <div className="error-message">{errorMessage}</div>}
           <label>Email</label>
           <input className="signin-input"  type="email"  placeholder="Enter email" value={email} onChange={(e) => setEmail(e.target.value)}/>
           <label>Password</label>
           <input  className="signin-input" type="password"  placeholder="Enter your password" value={password} onChange={(e) => setPassword(e.target.value)}/>
-          <button className="signin-btn" onClick={handleSignin}>Sign In</button>
+          <button className="signin-btn" type="submit">Sign In</button>
           <p>Don't have an account? <a href="/signup">Sign up</a></p>
           </form>
       </div>

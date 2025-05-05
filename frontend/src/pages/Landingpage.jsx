@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import './Landingpage.css'; 
 import React from 'react';
+import backgroundimg from '../assets/background.jpg'; // Adjust the path as necessary
 
 const Landingpage = () => {
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ const Landingpage = () => {
   };
 
   return (
-    <div className="get-started-container">
+    <div className="get-started-container" style={{backgroundImage:`url(${backgroundimg})`}}>
       <div className="overlay"></div>
 
       {/* Navbar */}
