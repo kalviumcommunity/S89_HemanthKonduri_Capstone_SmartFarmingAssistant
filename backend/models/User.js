@@ -5,17 +5,18 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: null,
   },
+ 
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+  },
   name: {
     type: String,
     required: function () {
       // Name is required for both normal and Google users
       return true;
     },
-  },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
   },
   password: {
     type: String,
