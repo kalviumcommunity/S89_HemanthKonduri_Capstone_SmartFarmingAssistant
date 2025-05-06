@@ -1,0 +1,74 @@
+/* NavBar.css */
+
+.navbar-container {
+    width: 100%;
+    background-color: #ffffff; /* White background */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px 20px;
+    box-sizing: border-box;
+    position: fixed;
+  }
+  
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .logo span {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333333; /* Dark text */
+  }
+  
+  .search-profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .search-profile input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+  }
+  
+  .profile-icon {
+    font-size: 24px;
+    cursor: pointer;
+  }
+  
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .nav-btn {
+    background: none;
+    border: none;
+    color: #333333; /* Dark text */
+    font-size: 16px;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  }
+  
+  .nav-btn:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .not-btn img {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+  }
+  
