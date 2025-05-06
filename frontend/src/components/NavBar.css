@@ -6,7 +6,7 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     padding: 10px 20px;
     box-sizing: border-box;
-    
+    position: fixed;
   }
   
   .navbar {

@@ -2,6 +2,7 @@ import React from 'react'
 import './Homepage.css';
 import NavBar from '../components/NavBar';
 import BottomBar from '../components/BottomBar';
+import homepagebackground from '../assets/homepagebackground.png';
 
 
 const Homepage = () => {
@@ -9,7 +10,7 @@ const Homepage = () => {
 
 
     
-    <div className='homepage-container'>
+    <div className='homepage-container' style={{backgroundImage:`url(${homepagebackground})`}}>
         <div className='overlay'>
        <div className='navbar'>
        <NavBar/>
@@ -67,9 +68,7 @@ const Homepage = () => {
   </div>
 </div>
         </div>
-        <div className='bottom-content'>
-       <BottomBar/>
-       </div>
+       
     </div>
   )
 }

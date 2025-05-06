@@ -98,14 +98,20 @@ const signin = async (req, res) => {
 };
 
 const getUser = async (req, res) => {
-    try {
-        const users = await User.find().select("-password"); // exclude passwords
-        res.status(200).json({ success: true, users });
-      } catch (error) {
-        console.error(error);
-        res.status(500).json({ success: false, message: "Internal server error" });
-      }
-  };
-  
+  const userId = req.params.id;
+  try {
+    if (!mongoose.isValidObjectId(userId)) {
+      return res.status(400).json({ success: false, message: "Invalid user ID" });
+    }
+    const user = await User.findById(userId).select("-password");
+    if (!user) {
+      return res.status(404).json({ success: false, message: "User not found" });
+    }
+    res.status(200).json({ success: true, user });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: "Internal server error" });
+  }
+};
 
 module.exports = { signup, signin, getUser};

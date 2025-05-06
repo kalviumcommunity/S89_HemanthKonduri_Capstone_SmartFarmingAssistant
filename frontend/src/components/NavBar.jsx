@@ -14,7 +14,7 @@ const NavBar = () => {
     navigate('/aichat');
   }
   const hamdleProducts = () =>{
-    navigate('/produts');
+    navigate('/buyProduts');
   }
 
   const handleHome = () => {
@@ -35,7 +35,7 @@ const NavBar = () => {
 
         <div className="nav-right">
           <div className="search-icon" onClick={toggleSearch}>
-            <img src="your-search-icon-url-here" alt="Search" />
+            
           </div>
 
           {showSearch && (
@@ -50,9 +50,7 @@ const NavBar = () => {
           <button className="nav-btn">Scan Disease</button>
           <button className="nav-btn" onClick={hamdleProducts}>Buy Products</button>
 
-          <button className="not-btn">
-            <img src="https://example.com/notification-icon.png" alt="Notifications" />
-          </button>
+        
 
           <span className="profile-icon">👤</span>
         </div>

@@ -1,21 +1,35 @@
 const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema({
+  googleId: {
+    type: String,
+    default: null,
+  },
   name: {
     type: String,
-    required: true,
-   
+    required: function () {
+      // Name is required for both normal and Google users
+      return true;
+    },
   },
   email: {
     type: String,
     required: true,
-  
+    unique: true,
   },
   password: {
     type: String,
-    required: true
-  }
- 
+    // Required only for non-Google users
+    required: function () {
+      return !this.googleId;
+    },
+  },
+  avatar: {
+    type: String, // Google profile picture or default
+    default: null,
+  },
+}, {
+  timestamps: true,
 });
 
 const User = mongoose.model("User", userSchema);
