@@ -25,7 +25,7 @@ app.use(express.json());
 // Session setup
 app.use(
   session({
-    secret: process.env.SESSION_SECRET || "Hemanth##9951",
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
   })
