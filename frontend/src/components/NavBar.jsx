@@ -13,7 +13,7 @@ const NavBar = () => {
   const handleChatWithAI = () =>{
     navigate('/aichat');
   }
-  const hamdleProducts = () =>{
+  const handleProducts = () =>{
     navigate('/buyproducts');
   }
 
@@ -48,7 +48,7 @@ const NavBar = () => {
           <button className="nav-btn" onClick={handleMarketPrices}>Market Prices</button>
           <button className="nav-btn" onClick={handleChatWithAI}>AI-Chat</button>
           <button className="nav-btn">Scan Disease</button>
-          <button className="nav-btn" onClick={hamdleProducts}>Buy Products</button>
+          <button className="nav-btn" onClick={handleProducts}>Buy Products</button>
 
         
 
