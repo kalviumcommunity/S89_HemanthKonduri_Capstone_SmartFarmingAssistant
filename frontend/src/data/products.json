@@ -1,0 +1,351 @@
+[
+  
+    {
+      "name": "Organic Compost Fertilizer",
+      "price": 650.00,
+      "description": "Rich organic compost to enhance soil fertility for all crops.",
+      "stock": 45,
+      "image": "https://agribegri.com/products_images/Organic-Compost-Fertilizer-5kg.jpg",
+      "rating": 4.5,
+      "shop_name": "GreenThumb Store"
+    },
+    {
+      "name": "Nitrogen Boost Fertilizer",
+      "price": 820.00,
+      "description": "High-nitrogen formula for leafy green growth.",
+      "stock": 30,
+      "image": "https://bighaat.com/products/nitrogen-boost-fertilizer-1kg.jpg",
+      "rating": 4.2,
+      "shop_name": "Farmers Delight"
+    },
+    {
+      "name": "Potassium Rich Granules",
+      "price": 990.00,
+      "description": "Granulated potassium fertilizer for root development.",
+      "stock": 60,
+      "image": "https://agribegri.com/products_images/Potassium-Rich-Granules-2kg.jpg",
+      "rating": 4.8,
+      "shop_name": "AgriWorld"
+    },
+    {
+      "name": "Bio-Fertilizer Mix",
+      "price": 525.00,
+      "description": "Eco-friendly bio-fertilizer for sustainable farming.",
+      "stock": 20,
+      "image": "https://bighaat.com/products/bio-fertilizer-mix-500g.jpg",
+      "rating": 3.9,
+      "shop_name": "EcoGrow Shop"
+    },
+    {
+      "name": "Liquid Seaweed Extract",
+      "price": 1175.00,
+      "description": "Concentrated seaweed extract for plant vigor.",
+      "stock": 50,
+      "image": "https://agribegri.com/products_images/Liquid-Seaweed-Extract-1L.jpg",
+      "rating": 4.6,
+      "shop_name": "GreenLeaf Mart"
+    },
+    {
+      "name": "Bone Meal Fertilizer",
+      "price": 750.00,
+      "description": "Natural bone meal for strong root systems.",
+      "stock": 0,
+      "image": "https://bighaat.com/products/bone-meal-fertilizer-1kg.jpg",
+      "rating": 4.1,
+      "shop_name": "Garden Essentials"
+    },
+    {
+      "name": "Fish Emulsion Fertilizer",
+      "price": 1045.00,
+      "description": "Organic fish emulsion for nutrient-rich soil.",
+      "stock": 35,
+      "image": "https://agribegri.com/products_images/Fish-Emulsion-Fertilizer-500ml.jpg",
+      "rating": 4.4,
+      "shop_name": "FarmFresh Outlet"
+    },
+    {
+      "name": "Urea Fertilizer 46-0-0",
+      "price": 295.00,
+      "description": "High-nitrogen urea for quick plant growth (50kg bag).",
+      "stock": 80,
+      "image": "https://iffco.in/images/products/urea_46_0_0.jpg",
+      "rating": 4.0,
+      "shop_name": "AgriSupply Co"
+    },
+    {
+      "name": "Phosphate Fertilizer",
+      "price": 865.00,
+      "description": "Phosphate-rich formula for blooming plants.",
+      "stock": 25,
+      "image": "https://bighaat.com/products/phosphate-fertilizer-1kg.jpg",
+      "rating": 4.3,
+      "shop_name": "GreenThumb Store"
+    },
+    {
+      "name": "Humic Acid Fertilizer",
+      "price": 1155.00,
+      "description": "Improves soil structure and nutrient uptake.",
+      "stock": 40,
+      "image": "https://agribegri.com/products_images/Humic-Acid-Fertilizer-1L.jpg",
+      "rating": 4.7,
+      "shop_name": "Farmers Delight"
+    },
+    {
+      "name": "Vermicompost Fertilizer",
+      "price": 695.00,
+      "description": "Worm-cast compost for organic gardening.",
+      "stock": 55,
+      "image": "https://bighaat.com/products/vermicompost-fertilizer-5kg.jpg",
+      "rating": 4.5,
+      "shop_name": "EcoGrow Shop"
+    },
+    {
+      "name": "Micronutrient Fertilizer Mix",
+      "price": 940.00,
+      "description": "Balanced mix of zinc, iron, and boron.",
+      "stock": 10,
+      "image": "https://agribegri.com/products_images/Micronutrient-Fertilizer-Mix-500g.jpg",
+      "rating": 4.2,
+      "shop_name": "AgriWorld"
+    },
+    {
+      "name": "Slow-Release Fertilizer",
+      "price": 1080.00,
+      "description": "Gradual nutrient release for long-term growth.",
+      "stock": 70,
+      "image": "https://bighaat.com/products/slow-release-fertilizer-2kg.jpg",
+      "rating": 4.6,
+      "shop_name": "GreenLeaf Mart"
+    },
+    {
+      "name": "NPK 20-20-20 Fertilizer",
+      "price": 790.00,
+      "description": "Balanced NPK for all-purpose use.",
+      "stock": 65,
+      "image": "https://iffco.in/images/products/npk_20_20_20.jpg",
+      "rating": 4.3,
+      "shop_name": "Garden Essentials"
+    },
+    {
+      "name": "Organic Manure Fertilizer",
+      "price": 565.00,
+      "description": "Natural manure for healthy soil.",
+      "stock": 30,
+      "image": "https://agribegri.com/products_images/Organic-Manure-Fertilizer-5kg.jpg",
+      "rating": 4.0,
+      "shop_name": "FarmFresh Outlet"
+    },
+  
+    {
+      "name": "Potash Fertilizer",
+      "price": 860.00,
+      "description": "High-potash formula for fruiting plants.",
+      "stock": 45,
+      "image": "https://bighaat.com/products/potash-fertilizer-1kg.jpg",
+      "rating": 4.4,
+      "shop_name": "AgriSupply Co"
+    },
+   
+    {
+      "name": "Neem Oil Insect Repellent",
+      "price": 475.00,
+      "description": "Natural neem oil to repel garden pests (1L).",
+      "stock": 50,
+      "image": "https://agribegri.com/products_images/Neem-Oil-Insect-Repellent-1L.jpg",
+      "rating": 4.3,
+      "shop_name": "GreenThumb Store"
+    },
+    {
+      "name": "Insecticidal Soap Spray",
+      "price": 395.00,
+      "description": "Safe soap spray for soft-bodied insects (500ml).",
+      "stock": 60,
+      "image": "https://bighaat.com/products/insecticidal-soap-spray-500ml.jpg",
+      "rating": 4.1,
+      "shop_name": "Farmers Delight"
+    },
+    {
+      "name": "Pyrethrin Insecticide",
+      "price": 750.00,
+      "description": "Natural pyrethrin for broad-spectrum pest control (500ml).",
+      "stock": 30,
+      "image": "https://agribegri.com/products_images/Pyrethrin-Insecticide-500ml.jpg",
+      "rating": 4.5,
+      "shop_name": "AgriWorld"
+    },
+    {
+      "name": "Diatomaceous Earth Powder",
+      "price": 675.00,
+      "description": "Organic powder to kill crawling insects (1kg).",
+      "stock": 45,
+      "image": "https://bighaat.com/products/diatomaceous-earth-powder-1kg.jpg",
+      "rating": 4.2,
+      "shop_name": "EcoGrow Shop"
+    },
+    {
+      "name": "Fungicide for Powdery Mildew",
+      "price": 895.00,
+      "description": "Effective fungicide for mildew control (500g).",
+      "stock": 25,
+      "image": "https://agribegri.com/products_images/Fungicide-Powdery-Mildew-500g.jpg",
+      "rating": 4.6,
+      "shop_name": "GreenLeaf Mart"
+    },
+    {
+      "name": "Systemic Insecticide Granules",
+      "price": 1025.00,
+      "description": "Systemic granules for long-lasting pest protection (1kg).",
+      "stock": 0,
+      "image": "https://bighaat.com/products/systemic-insecticide-granules-1kg.jpg",
+      "rating": 4.0,
+      "shop_name": "Garden Essentials"
+    },
+    {
+      "name": "Organic Slug Repellent",
+      "price": 460.00,
+      "description": "Safe repellent for slugs and snails (500g).",
+      "stock": 70,
+      "image": "https://agribegri.com/products_images/Organic-Slug-Repellent-500g.jpg",
+      "rating": 4.4,
+      "shop_name": "FarmFresh Outlet"
+    },
+    {
+      "name": "Aphid Control Spray",
+      "price": 540.00,
+      "description": "Targeted spray for aphid infestations (500ml).",
+      "stock": 55,
+      "image": "https://bighaat.com/products/aphid-control-spray-500ml.jpg",
+      "rating": 4.1,
+      "shop_name": "AgriSupply Co"
+    },
+    {
+      "name": "Weed Killer Concentrate",
+      "price": 1180.00,
+      "description": "Powerful concentrate for tough weeds (1L).",
+      "stock": 40,
+      "image": "https://agribegri.com/products_images/Weed-Killer-Concentrate-1L.jpg",
+      "rating": 4.7,
+      "shop_name": "GreenThumb Store"
+    },
+    {
+      "name": "Mite Control Spray",
+      "price": 715.00,
+      "description": "Effective spray for spider mites (500ml).",
+      "stock": 20,
+      "image": "https://bighaat.com/products/mite-control-spray-500ml.jpg",
+      "rating": 4.3,
+      "shop_name": "Farmers Delight"
+    },
+  
+    {
+      "name": "Ant Bait Gel",
+      "price": 365.00,
+      "description": "Gel bait for ant colony elimination (50g).",
+      "stock": 65,
+      "image": "https://agribegri.com/products_images/Ant-Bait-Gel-50g.jpg",
+      "rating": 4.0,
+      "shop_name": "EcoGrow Shop"
+    },
+  
+    {
+      "name": "Garden Trowel",
+      "price": 250.00,
+      "description": "Sturdy trowel for digging and planting.",
+      "stock": 60,
+      "image": "https://agribegri.com/products_images/Garden-Trowel.jpg",
+      "rating": 4.4,
+      "shop_name": "GreenThumb Store"
+    },
+    {
+      "name": "Pruning Shears",
+      "price": 650.00,
+      "description": "Sharp shears for trimming branches.",
+      "stock": 40,
+      "image": "https://bighaat.com/products/pruning-shears.jpg",
+      "rating": 4.7,
+      "shop_name": "Farmers Delight"
+    },
+    {
+      "name": "Garden Hoe",
+      "price": 480.00,
+      "description": "Durable hoe for weeding and breaking soil.",
+      "stock": 50,
+      "image": "https://agribegri.com/products_images/Garden-Hoe.jpg",
+      "rating": 4.3,
+      "shop_name": "AgriWorld"
+    },
+    {
+      "name": "Watering Can 2L",
+      "price": 420.00,
+      "description": "2-liter can with adjustable nozzle.",
+      "stock": 70,
+      "image": "https://bighaat.com/products/watering-can-2L.jpg",
+      "rating": 4.5,
+      "shop_name": "EcoGrow Shop"
+    },
+    {
+      "name": "Garden Rake",
+      "price": 530.00,
+      "description": "Wide rake for leveling soil and leaves.",
+      "stock": 30,
+      "image": "https://agribegri.com/products_images/Garden-Rake.jpg",
+      "rating": 4.2,
+      "shop_name": "GreenLeaf Mart"
+    },
+    {
+      "name": "Hand Weeder",
+      "price": 320.00,
+      "description": "Tool for removing weeds with roots.",
+      "stock": 0,
+      "image": "https://bighaat.com/products/hand-weeder.jpg",
+      "rating": 4.0,
+      "shop_name": "Garden Essentials"
+    },
+    {
+      "name": "Garden Fork",
+      "price": 500.00,
+      "description": "Strong fork for turning soil.",
+      "stock": 45,
+      "image": "https://agribegri.com/products_images/Garden-Fork.jpg",
+      "rating": 4.4,
+      "shop_name": "FarmFresh Outlet"
+    },
+    {
+      "name": "Planting Dibber",
+      "price": 260.00,
+      "description": "Tool for making holes to plant seeds.",
+      "stock": 55,
+      "image": "https://bighaat.com/products/planting-dibber.jpg",
+      "rating": 4.1,
+      "shop_name": "AgriSupply Co"
+    },
+    {
+      "name": "Garden Shovel",
+      "price": 610.00,
+      "description": "Heavy-duty shovel for digging.",
+      "stock": 35,
+      "image": "https://agribegri.com/products_images/Garden-Shovel.jpg",
+      "rating": 4.6,
+      "shop_name": "GreenThumb Store"
+    },
+    {
+      "name": "Hedge Trimmer",
+      "price": 1500.00,
+      "description": "Manual trimmer for shaping hedges.",
+      "stock": 20,
+      "image": "https://bighaat.com/products/hedge-trimmer.jpg",
+      "rating": 4.3,
+      "shop_name": "Farmers Delight"
+    },
+   
+    {
+      "name": "Garden Kneeler Pad",
+      "price": 370.00,
+      "description": "Comfortable pad for kneeling while gardening.",
+      "stock": 65,
+      "image": "https://agribegri.com/products_images/Garden-Kneeler-Pad.jpg",
+      "rating": 4.5,
+      "shop_name": "EcoGrow Shop"
+    }
+   
+  ]

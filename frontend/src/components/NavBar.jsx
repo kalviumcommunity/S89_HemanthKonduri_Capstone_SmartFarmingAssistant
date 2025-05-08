@@ -14,7 +14,7 @@ const NavBar = () => {
     navigate('/aichat');
   }
   const hamdleProducts = () =>{
-    navigate('/buyProduts');
+    navigate('/buyproducts');
   }
 
   const handleHome = () => {
