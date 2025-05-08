@@ -1,10 +1,6 @@
 const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema({
-  googleId: {
-    type: String,
-    default: null,
-  },
  
   email: {
     type: String,
@@ -25,10 +21,16 @@ const userSchema = new mongoose.Schema({
       return !this.googleId;
     },
   },
+  
+  googleId: {
+    type: String,
+    default: null,
+  },
   avatar: {
     type: String, // Google profile picture or default
     default: null,
   },
+ 
 }, {
   timestamps: true,
 });
