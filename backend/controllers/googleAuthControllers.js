@@ -54,10 +54,10 @@ const googleAuth = async (req, res) => {
       expiresIn: "1h",
     });
     // Redirect to frontend with token and userId
-    res.redirect(`http://localhost:5175/google-callback?token=${token}&userId=${req.user._id}`);
+    res.redirect(`http://localhost:5173/google-callback?token=${token}&userId=${req.user._id}`);
   } catch (error) {
     console.error("Google auth error:", error);
-    res.redirect("http://localhost:5175/signin?error=google-auth-failed");
+    res.redirect("http://localhost:5173/signin?error=google-auth-failed");
   }
 };
 
