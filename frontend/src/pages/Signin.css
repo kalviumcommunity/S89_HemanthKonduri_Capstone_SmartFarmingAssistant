@@ -79,6 +79,21 @@
     object-fit: cover;
   }
   
+
+  .forgot-password-container {
+  margin-top: 10px;
+  text-align: center; /* Center the link horizontally */
+}
+
+.forgot-password-link {
+  color: #0078d7; /* Style the link color (a typical blue for links) */
+  text-decoration: none; /* Remove the default underline */
+  font-size: 14px; /* Make the link text a bit smaller, adjust as needed */
+}
+
+.forgot-password-link:hover {
+  text-decoration: underline; /* Add underline on hover for better user feedback */
+}
   
  
   

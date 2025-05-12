@@ -13,6 +13,10 @@ const Signin = () => {
     navigate("/")
   };
 
+  const handleForgotPassword = ()=>{
+    navigate("/forgotPassword")
+  }
+
   const handleSignin = async (e) => {
 e.preventDefault(); // Prevent the default form submission behavior
     try {
@@ -49,6 +53,9 @@ e.preventDefault(); // Prevent the default form submission behavior
           <label>Password</label>
           <input  className="signin-input" type="password"  placeholder="Enter your password" value={password} onChange={(e) => setPassword(e.target.value)}/>
           <button className="signin-btn" type="submit">Sign In</button>
+          <div className='forgot-password-container'>
+          <a href="/forgotPassword" className="forgot-password-link" onClick={handleForgotPassword}>Forgot Password?</a>
+          </div>
           <p>Don't have an account? <a href="/signup">Sign up</a></p>
           </form>
       </div>

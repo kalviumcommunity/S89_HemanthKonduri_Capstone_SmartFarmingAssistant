@@ -1,7 +1,6 @@
 import React from 'react'
 import './Homepage.css';
 import NavBar from '../components/NavBar';
-import BottomBar from '../components/BottomBar';
 import homepagebackground from '../assets/homepagebackground.png';
 
 

@@ -97,6 +97,32 @@ const signin = async (req, res) => {
   }
 };
 
+const forgotPassword = async (req,res)=>{
+  const { email, newPassword } = req.body;
+
+  try {
+    // Check if user exists
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ success: false, message: "User not found" });
+    }
+
+    // Hash the new password
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(newPassword, salt);
+
+    // Update password in DB
+    user.password = hashedPassword;
+    await user.save();
+
+    return res.status(200).json({ success: true, message: "Password reset successful" });
+  } catch (error) {
+    console.error("Forgot password error:", error);
+    return res.status(500).json({ success: false, message: "Server error" });
+  }
+}
+
+
 const getUser = async (req, res) => {
   const userId = req.params.id;
   try {
@@ -114,4 +140,4 @@ const getUser = async (req, res) => {
   }
 };
 
-module.exports = { signup, signin, getUser};
+module.exports = { signup, signin, getUser, forgotPassword};
