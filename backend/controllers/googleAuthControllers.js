@@ -53,11 +53,17 @@ const googleAuth = async (req, res) => {
     const token = jwt.sign({ userId: req.user._id }, process.env.JWT_SECRET, {
       expiresIn: "1h",
     });
-    // Redirect to frontend with token and userId
-    res.redirect(`http://localhost:5173/google-callback?token=${token}&userId=${req.user._id}`);
+    res.cookie("token", token, {
+  httpOnly: true,
+  secure: true, // Set to true in production (requires HTTPS)
+  sameSite: "Lax", // Adjust as needed
+  maxAge: 7 * 24 * 60 * 60 * 1000, // 1 week
+});
+res.redirect(`http://localhost:5174/google-callback`);
+
   } catch (error) {
     console.error("Google auth error:", error);
-    res.redirect("http://localhost:5173/signin?error=google-auth-failed");
+    res.redirect("http://localhost:5174/signin?error=google-auth-failed");
   }
 };
 

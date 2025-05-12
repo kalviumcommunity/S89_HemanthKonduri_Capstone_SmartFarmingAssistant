@@ -1,6 +1,6 @@
 const express = require("express");
 const passport = require("passport");
-const { signup, signin, getUser } = require("../controllers/authControllers");
+const { signup, signin, getUser, forgotPassword } = require("../controllers/authControllers");
 const googleAuth = require("../controllers/googleAuthControllers");
 
 const router = express.Router();
@@ -13,5 +13,6 @@ router.get("/google/callback", passport.authenticate("google", { failureRedirect
 router.post("/signup", signup);
 router.post("/signin", signin);
 router.get("/get-user/:id", getUser);
+router.put("/forgot-password", forgotPassword);
 
 module.exports = router;
