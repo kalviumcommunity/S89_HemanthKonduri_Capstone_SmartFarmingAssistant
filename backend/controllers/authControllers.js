@@ -6,56 +6,7 @@ const mongoose = require("mongoose");
  // Ensure this path is correct
 
 
- // --- SIGNIN ---
-const signin = async (req, res) => {
-  const { email, password } = req.body;
  
-  try {
-    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      return res.status(400).json({ success: false, message: "Invalid email format" });
-    }
-    if (!password) {
-      return res.status(400).json({ success: false, message: "Password is required" });
-    }
-
-    const user = await User.findOne({ email });
-    if (!user) {
-      return res.status(401).json({ success: false, message: "Invalid email or password" }); // Generic message
-    }
-
-    // If user was created via Google and has no password (common pattern)
-    if (!user.password && user.googleId) {
-        return res.status(401).json({ success: false, message: "Please sign in using Google."});
-    }
-    if (!user.password) { // Should not happen if not Google user, but defensive check
-        return res.status(401).json({ success: false, message: "Account error. Please contact support."})
-    }
-
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-      return res.status(401).json({ success: false, message: "Invalid email or password" }); // Generic message
-    }
-
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
-      expiresIn: "1h" // Or your preferred expiration
-    });
-
-    res.status(200).json({
-      success: true,
-      message: "Login successful",
-      token,
-      user: { // Send back user details
-        _id: user._id,
-        name: user.name,
-        email: user.email,
-        avatar: user.avatar
-      }
-    });
-  } catch (error) {
-    console.error("Signin Error:", error);
-    res.status(500).json({ success: false, message: "Internal server error during signin" });
-  }
-};
 // --- SIGNUP ---
 const signup = async (req, res) => {
   const { name, email, password } = req.body;
@@ -106,6 +57,56 @@ const signup = async (req, res) => {
   }
 };
 
+// --- SIGNIN ---
+const signin = async (req, res) => {
+  const { email, password } = req.body;
+ 
+  try {
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return res.status(400).json({ success: false, message: "Invalid email format" });
+    }
+    if (!password) {
+      return res.status(400).json({ success: false, message: "Password is required" });
+    }
+
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(401).json({ success: false, message: "Invalid email or password" }); // Generic message
+    }
+
+    // If user was created via Google and has no password (common pattern)
+    if (!user.password && user.googleId) {
+        return res.status(401).json({ success: false, message: "Please sign in using Google."});
+    }
+    if (!user.password) { // Should not happen if not Google user, but defensive check
+        return res.status(401).json({ success: false, message: "Account error. Please contact support."})
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(401).json({ success: false, message: "Invalid email or password" }); // Generic message
+    }
+
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "1h" // Or your preferred expiration
+    });
+
+    res.status(200).json({
+      success: true,
+      message: "Login successful",
+      token,
+      user: { // Send back user details
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        avatar: user.avatar
+      }
+    });
+  } catch (error) {
+    console.error("Signin Error:", error);
+    res.status(500).json({ success: false, message: "Internal server error during signin" });
+  }
+};
 
 
 // --- FORGOT PASSWORD ---
