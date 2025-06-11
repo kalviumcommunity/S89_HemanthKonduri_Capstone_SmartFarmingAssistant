@@ -1,0 +1,337 @@
+/* Full page container */
+.cw-page-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #f4faf2;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.cw-chat-layout {
+  display: flex;
+  height: 100%;
+}
+
+/* ... your existing styles ... */
+
+/* Sidebar Enhancements */
+.cw-sidebar {
+  width: 280px; /* Slightly wider for delete button */
+  background-color: #eaf5e2;
+  border-right: 1px solid #cde8c4;
+  padding: 1rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column; /* To push history list down if needed */
+}
+
+.cw-history-item {
+  padding: 10px 12px; /* Adjusted padding */
+  background-color: #f4faf2;
+  border-radius: 6px; /* Slightly more rounded */
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+  display: flex; /* For aligning name and delete button */
+  justify-content: space-between; /* Pushes button to the right */
+  align-items: center; /* Vertically align items */
+  border: 1px solid transparent; /* For active state border */
+}
+
+.cw-history-item:hover {
+  background-color: #dcedc8; /* Lighter green on hover */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.cw-history-item.active {
+  background-color: #a5d6a7; /* More distinct active color */
+  color: #1b5e20; /* Darker text for active item */
+  font-weight: 600;
+  border-left: 4px solid #4caf50; /* Active indicator */
+  padding-left: 8px; /* Adjust padding for border */
+}
+
+.cw-history-item-name {
+  flex-grow: 1; /* Allow name to take available space */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Show ... if name is too long */
+  margin-right: 8px; /* Space before delete button */
+}
+
+.cw-delete-chat-btn {
+  background: none;
+  border: none;
+  color: #e57373; /* Reddish color for delete */
+  cursor: pointer;
+  padding: 4px;
+  font-size: 1rem; /* Adjust icon size if needed */
+  line-height: 1;
+  border-radius: 4px;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.cw-delete-chat-btn:hover {
+  color: #d32f2f; /* Darker red on hover */
+  background-color: rgba(255, 0, 0, 0.1);
+}
+
+.cw-no-history {
+  text-align: center;
+  color: #757575;
+  font-style: italic;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+
+/* Chat Window Container within the page */
+.cw-chat-window-container { /* If ChatWindow itself is a component on a page */
+  display: flex;
+  flex-direction: column; /* Main axis for header, messages, input */
+  height: 100%; /* Take full height of its parent in ChatPage.jsx */
+  width: 100%; /* Take full width of its parent in ChatPage.jsx */
+  overflow: hidden; /* Important for controlling scroll within .cw-messages */
+}
+
+
+/* Header Update */
+.cw-header {
+  background-color: #4caf50;
+  color: white;
+  text-align: center;
+  padding: 0.9rem 1rem; /* Slightly adjusted padding */
+  font-size: 1.1rem; /* Slightly adjusted font size */
+  font-weight: 600;
+  border-bottom: 1px solid #388e3c; /* Darker border */
+  flex-shrink: 0; /* Prevent header from shrinking */
+}
+
+/* Error Banner (more prominent) */
+.cw-error-display { /* Your existing error display */
+  color: #d32f2f; /* Red color */
+  background-color: #ffcdd2; /* Light red background */
+  text-align: center;
+  padding: 8px 12px;
+  margin: 0 1rem 8px 1rem; /* Margin within chat area */
+  font-size: 0.9rem;
+  border: 1px solid #ef9a9a;
+  border-radius: 4px;
+  flex-shrink: 0; /* Prevent from shrinking */
+}
+.cw-error-banner { /* New style for potentially page-level errors */
+  background-color: #ffcdd2;
+  color: #c62828;
+  padding: 10px;
+  text-align: center;
+  font-weight: 500;
+  border-bottom: 1px solid #ef9a9a;
+  flex-shrink: 0;
+}
+
+
+/* Ensure textarea grows */
+.cw-input-form textarea {
+  flex-grow: 1;
+  resize: none;
+  padding: 10px 12px;
+  border: 1px solid #c5e1a5;
+  border-radius: 20px; /* More pill-shaped */
+  font-size: 1rem;
+  outline: none;
+  min-height: 40px; /* Consistent min-height */
+  max-height: 120px; /* Max height before scrollbar appears inside textarea */
+  line-height: 1.4;
+  overflow-y: auto; /* Add scrollbar if content exceeds max-height */
+  transition: border-color 0.2s ease;
+}
+.cw-input-form textarea:focus {
+  border-color: #81c784;
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+}
+
+
+.cw-input-form button {
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  padding: 0 12px; /* Padding for icon button */
+  height: 40px; /* Match textarea initial height */
+  min-width: 40px; /* Ensure button is circular or squareish */
+  margin-left: 10px;
+  border-radius: 50%; /* Circular button */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cw-input-form button:hover {
+  background-color: #388e3c;
+}
+.cw-input-form button:disabled {
+  background-color: #a5d6a7;
+  cursor: not-allowed;
+}
+.cw-input-form button svg { /* Style for the send icon */
+  width: 20px;
+  height: 20px;
+}
+
+.cw-chat-main {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Chat area */
+.cw-chat-area {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  max-width: 900px;
+  margin: 0 auto;
+  background: #ffffff;
+  border: 1px solid #cde8c4;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* Header */
+.cw-header {
+  background-color: #4caf50;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  border-bottom: 1px solid #81c784;
+}
+
+/* Messages area */
+.cw-messages {
+  flex: 1;
+  padding: 1rem;
+  overflow-y: auto;
+  background-color: #f9fff6;
+}
+
+/* Message wrapper (user/bot) */
+.cw-message-wrapper {
+  display: flex;
+  margin-bottom: 12px;
+}
+
+/* Bubble style for all messages */
+.cw-message-bubble {
+  max-width: 70%;
+  padding: 12px 16px;
+  border-radius: 18px;
+  font-size: 1rem;
+  line-height: 1.4;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+/* Bot messages */
+.cw-message-wrapper.bot {
+  justify-content: flex-start;
+}
+.cw-message-wrapper.bot .cw-message-bubble {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  border-top-left-radius: 4px;
+}
+
+/* User messages */
+.cw-message-wrapper.user {
+  justify-content: flex-end;
+}
+.cw-message-wrapper.user .cw-message-bubble {
+  background-color: #a5d6a7;
+  color: #1b5e20;
+  border-top-right-radius: 4px;
+}
+
+/* Typing indicator */
+.cw-typing-indicator span {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin: 0 2px;
+  background-color: #4caf50;
+  border-radius: 50%;
+  animation: blink 1.2s infinite ease-in-out;
+}
+.cw-typing-indicator span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.cw-typing-indicator span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes blink {
+  0%, 80%, 100% { opacity: 0; }
+  40% { opacity: 1; }
+}
+
+/* Input area */
+.cw-input-form {
+  display: flex;
+  padding: 12px;
+  background-color: #ffffff;
+  border-top: 1px solid #c8e6c9;
+}
+
+.cw-input-form textarea {
+  flex-grow: 1;
+  resize: none;
+  padding: 10px 12px;
+  border: 1px solid #c5e1a5;
+  border-radius: 6px;
+  font-size: 1rem;
+  outline: none;
+  min-height: 40px;
+  max-height: 100px;
+}
+
+.cw-input-form button {
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  padding: 10px 16px;
+  margin-left: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cw-input-form button:hover {
+  background-color: #388e3c;
+}
+
+/* Spinner */
+.cw-spinner {
+  width: 20px;
+  height: 20px;
+  border: 3px solid #c5e1a5;
+  border-top: 3px solid #4caf50;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Error */
+.cw-error-display {
+  color: red;
+  text-align: center;
+  margin: 4px 0;
+  font-size: 0.9rem;
+}

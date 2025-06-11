@@ -1,249 +1,335 @@
+/* HomePage.css - Updated for new layout */
+
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  }
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
 
-  body, html {
-    height: 100%;
-    width: 100%;
-    overflow-x: hidden;
-  }
+body,
+html {
+  height: 100%; /* This might be an issue if you want scrolling beyond viewport height */
+  width: 100%;
+  /* Consider removing height: 100% if it restricts scrolling */
+}
 
-  .homepage-container {
+.homepage-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensures footer is at bottom if content is short */
+  animation: fadeIn 1s ease-in-out; /* Your existing fadeIn */
+}
+
+/* --- Hero Section (Auto-Changing Banner) --- */
+.hero-section {
+    height: 60vh; /* Roughly half screen, adjust as needed */
+    min-height: 400px; /* Minimum height */
+    background-size: cover;
+    background-position: center center;
+    position: relative; /* For overlay and dots */
     display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-  }
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: background-image 1s ease-in-out; /* Smooth transition for background image */
+    color: #fff; /* Default text color for hero */
+}
 
-  .overlay {
+.hero-overlay {
     position: absolute;
     top: 0;
     left: 0;
-    height: 300%;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Dark overlay */
-    z-index: 0;
-  }
-  
-  /* Navbar */
-  .navbar {
-    z-index: 1;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Dark overlay for text readability */
     display: flex;
-    justify-content: space-between;
+    flex-direction: column; /* To position dots at the bottom */
     align-items: center;
-    padding: 1.2rem 3rem;
-    position: relative;
-    background-color: rgba(252, 250, 250, 0.1); /* Semi-transparent background */
-  
-  }
+    justify-content: center;
+    padding: 20px;
+}
 
-  .logo {
+.hero-content { /* .container class (if used inside) will handle width and centering */
+    max-width: 800px;
+    z-index: 2; /* Above overlay image, below dots if they overlap */
+}
+
+.hero-content h1 {
+    font-size: 2.5rem; /* Your existing h1 size from middle-content */
+    margin-bottom: 1rem; /* Your existing margin */
+    color: #ffffff; /* White for better contrast on dark overlay */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Enhanced shadow */
+}
+
+.hero-content .hero-description {
+    font-size: 1.2em;
+    margin-bottom: 1.5em;
+    line-height: 1.6;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.banner-dots {
+    position: absolute;
+    bottom: 20px; /* Position dots at the bottom of the hero section */
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
+    gap: 10px;
+    z-index: 3; /* Above hero content if necessary */
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.dot.active {
+    background-color: #fff; /* Active dot is fully white */
+}
+
+
+/* --- Main Heading Section (below hero) --- */
+.main-heading-section {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: #ffffff; /* Was white in your original overlay */
+}
+
+.main-heading-section h1 {
+    font-size: 2.5rem; /* Reusing your style */
+    margin-bottom: 1rem;
+    color: #2c3e50;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.main-heading-section .sub-text {
+    font-size: 1.1rem; /* Reusing your style */
+    color: #555;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+
+/* --- Alternating Feature Sections --- 
+.alternating-features-container {
+    /* No specific styles for the container itself, sections handle padding
+}  */
+
+.alternating-feature-section {
+    padding: 50px 20px; /* Padding for each section */
+    overflow: hidden;
+}
+.alternating-feature-section:nth-child(even) { /* Alternating background */
+    background-color: #f9f9f9; /* Light grey, similar to your old .feature-item */
+}
+
+.feature-content-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two equal columns */
+    gap: 40px; /* Space between image and text */
+    align-items: center; /* Vertically align items in the grid cells */
+    max-width: 1100px; /* Max width for content area */
+    margin: 0 auto; /* Center the grid */
+}
+
+/* Image on the right by default in markup, CSS handles visual order */
+.alternating-feature-section.image-right .feature-image-wrapper {
+    order: 2; /* Image column comes second visually */
+}
+.alternating-feature-section.image-right .feature-text-content {
+    order: 1; /* Text column comes first visually */
+}
+
+/* Image on the left */
+.alternating-feature-section.image-left .feature-image-wrapper {
+    order: 1;
+}
+.alternating-feature-section.image-left .feature-text-content {
+    order: 2;
+}
+
+.feature-image-wrapper {
+    display: flex;
+    justify-content: center;
     align-items: center;
-    font-size: 1.5rem;
+}
+
+.feature-image-circle {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%; /* Makes the image circular */
+    object-fit: cover;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); /* Softer, more modern shadow */
+    border: 5px solid white; /* Optional: adds a nice separation */
+}
+/*
+.feature-text-content {
+     Text alignment will be default (left) 
+}
+     */
+
+.feature-text-content h2 {
+    font-size: 2rem; /* Your section-title size */
+    color: #2c3e50; /* Your existing heading color */
+    margin-bottom: 1rem;
     font-weight: 600;
-    height: 10px;
-    width: 10px;
-    background: transparent;
-  }
-  
-  .logo img {
-    width: 40px;
-    height: 40px;
-    margin-right: 10px;
-  }
+}
 
-  .logo span {
-    color: #fff;
-    font-size: 1.5rem;
-    font-weight: 600;
-  }
+.feature-text-content p {
+    font-size: 1rem; /* Your existing paragraph size */
+    color: #555; /* Your existing paragraph color */
+    line-height: 1.7;
+    margin-bottom: 1.5rem; /* Space for readability */
+}
 
-  .nav-right {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-  
-  .nav-btn {
-    background-color: transparent;
+
+/* --- Final CTA Section --- (Example from previous suggestion, adapt as needed) */
+.final-cta-section {
+    padding: 60px 20px;
+    text-align: center;
+    background-color: #e9f5e9; /* A light, inviting color */
+}
+.final-cta-section h2 {
+    font-size: 2.2em;
+    margin-bottom: 15px;
+    color: #2c3e50;
+}
+.final-cta-section p {
+    font-size: 1.1em;
+    margin-bottom: 30px;
+    color: #555;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/* --- Footer --- (Example from previous suggestion, adapt as needed) */
+.home-footer {
+    background-color: #343a40;
+    color: #f8f9fa;
+    text-align: center;
+    padding: 25px 0;
+    margin-top: auto; /* Pushes footer to bottom if content is short, works with flex column on container */
+}
+.home-footer p {
+    margin: 0;
+    font-size: 0.9em;
+}
+
+/* --- General Button Styles (You should have these defined globally or in App.css) --- */
+.btn {
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 500;
+    display: inline-block;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    cursor: pointer;
     border: none;
-    padding: 10px 16px;
-    border-radius: 8px;
+    font-size: 1em;
+    text-align: center;
+}
+.btn:hover {
+    transform: translateY(-1px);
+}
+.btn-primary {
+    background-color: #28a745; /* A common green, adjust to your theme */
     color: white;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .nav-btn:hover {
-    text-decoration: underline;
-  }
-
-  .not-btn{
-    background-color: transparent;
-    border: none;
-    padding: 10px 16px;
-    border-radius: 8px;
-    color: rgb(231, 21, 21);
-    cursor: pointer;
-    transition: background-color 0.3s;
-    height: 50px;
-    width: 50px;
-  }
-
-  .middle-content {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    height: calc(100vh - 500px); /* Adjust based on your navbar height */
-    padding: 0 1rem;
-  }
-
-  .feature-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 50px;
-    padding: 100px 20px; /* This creates scrolling */
-  }
-  
-  .disease-detection{
-    background-color:rgba(248, 247, 247);
-    
-    border-radius: 10px;
-    padding: 20px;
-    width: 300px;
-    height: 300px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease-in-out;
-  }
-
-  .disease-detection:hover, .market-prices:hover, .AI-chat:hover, .buy-products:hover, .weather-updates:hover, .farming-tips:hover, .govt-schemes:hover, .expert-support:hover{
-    transform: scale(1.05);
-  }
-
-  .market-prices{
-    background-color: rgb(252, 250, 250);
-    
-    border-radius: 10px;
-    padding: 20px;
-    width: 300px;
-    height: 300px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease-in-out;
-  }
-
-  .AI-chat{
-    background-color: rgb(248, 252, 250);
-     
-    border-radius: 10px;
-    padding: 20px;
-    width: 300px;
-    height: 300px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease-in-out;
-  }
-
-  .buy-products{
-    background-color: rgb(250, 250, 251);
-   
-    border-radius: 10px;
-    padding: 20px;
-    width: 300px;
-    height: 300px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease-in-out;
-  }
-
-  .weather-updates{
-    background-color: rgb(250, 250, 251);
-    
-    border-radius: 10px;
-    padding: 20px;
-    width: 300px;
-    height: 300px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease-in-out;
-  }
-
-  .farming-tips{
-    background-color: rgb(250, 250, 251);
-    
-    border-radius: 10px;
-    padding: 20px;
-    width: 300px;
-    height: 300px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease-in-out;
-
-  }
-  .govt-schemes{
-    background-color: rgb(250, 250, 251);
-    
-    border-radius: 10px;
-    padding: 20px;
-    width: 300px;
-    height: 300px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease-in-out;
-  }
-  .expert-support{
-    background-color: rgb(250, 250, 251);
-    
-    border-radius: 10px;
-    padding: 20px;
-    width: 300px;
-    height: 300px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease-in-out;
-  }
-
-  
+}
+.btn-primary:hover {
+    background-color: #218838;
+}
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+}
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+.btn-large {
+    font-size: 1.1em;
+    padding: 14px 28px;
+}
+.btn-hero { /* Specific styling for hero button if needed */
+    padding: 12px 28px;
+    font-size: 1.1em;
+}
 
 
+/* --- Responsive Adjustments --- */
+@media (max-width: 992px) {
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+    .hero-content .hero-description {
+        font-size: 1.1em;
+    }
+    .feature-image-circle {
+        width: 250px;
+        height: 250px;
+    }
+    .feature-text-content h2 {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-section {
+        height: 50vh; /* Slightly less height on smaller screens */
+        min-height: 350px;
+    }
+    .hero-content h1 {
+        font-size: 1.8rem;
+    }
+     .hero-content .hero-description {
+        font-size: 1rem;
+    }
+    .main-heading-section h1 {
+        font-size: 2rem;
+    }
+    .main-heading-section .sub-text {
+        font-size: 1rem;
+    }
+
+    .feature-content-grid {
+        grid-template-columns: 1fr; /* Stack image and text */
+        text-align: center; /* Center text when stacked */
+        gap: 30px;
+    }
+    /* Reset order for stacked layout */
+    .alternating-feature-section.image-right .feature-image-wrapper,
+    .alternating-feature-section.image-left .feature-image-wrapper {
+        order: 1; /* Image comes first */
+        margin-bottom: 20px; /* Space between stacked image and text */
+    }
+    .alternating-feature-section.image-right .feature-text-content,
+    .alternating-feature-section.image-left .feature-text-content {
+        order: 2; /* Text comes second */
+    }
+    .feature-image-circle {
+        width: 200px; /* Smaller image on mobile */
+        height: 200px;
+    }
+    .feature-text-content {
+        padding: 0 10px; /* Add some horizontal padding to text when stacked */
+    }
+    .feature-text-content h2 {
+        font-size: 1.6rem;
+    }
+}
+
+/* Animation (Your existing keyframes) */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
