@@ -1,0 +1,68 @@
+.my-orders-container {
+    padding: 2rem 0;
+}
+.my-orders-container h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+.no-orders {
+    text-align: center;
+    padding: 3rem;
+    background: #f9f9f9;
+    border-radius: 8px;
+}
+.orders-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+.order-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: white;
+}
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    background: #f7f7f7;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #ddd;
+    border-radius: 8px 8px 0 0;
+}
+.order-header > div {
+    display: flex;
+    flex-direction: column;
+}
+.order-label {
+    font-size: 0.8rem;
+    color: #777;
+    font-weight: 500;
+}
+.order-body {
+    padding: 1.5rem;
+}
+.order-body h4 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    color: #2c5c3d;
+}
+.order-item-detail {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+.order-item-detail img {
+    width: 75px;
+    height: 75px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+.item-name {
+    font-weight: bold;
+    margin: 0;
+}
+.item-qty {
+    color: #555;
+    margin: 0.25rem 0 0 0;
+}

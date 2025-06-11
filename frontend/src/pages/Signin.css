@@ -1,103 +1,239 @@
-.signin-container {
-    display: flex;
-    height: 100vh;
-    width: 200vh;
-    background-color: #8ac63e;
-  }
+/* frontend/src/Signin.css */
 
-  .signin-grid {
-    flex: 1;
+/* --- Common Auth Page Styles (Copied from Signup.css for this example) --- */
+.signup-container, .signin-container, .forgotPassword-container {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+    background-color: #f4f6f8;
+    overflow: hidden;
+}
+
+.signup-left, .signin-left, .forgotPassword-left {
+    flex: 1 1 550px; 
+    max-width: 550px;
+    background-color: #ffffff;
+    padding: 2.5rem 3rem;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
     position: relative;
-  }
-  .signin-title {
-    font-family: "Georgia", serif;
-    font-size: 24px;
-    margin-bottom: 20px;
-    text-align: center;
-  }
-  .back-arrow {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    font-size: 50px;
-    cursor: pointer;
-  }
+    box-shadow: 5px 0 15px rgba(0, 0, 0, 0.05);
+}
 
-   .signin-form-box {
-    background-color: #f8f8f8;
-    padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 350px;
-    height: 400px;
-   
-    text-align: left;
-  }
-  .signin-form-box p {
-    font-size: 16px;
-    color: #555;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    text-align: center;
-  }
+.signup-right, .signin-right, .forgotPassword-right {
+    flex: 1 1 60%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e9ecef;
+    overflow: hidden;
+}
 
-  .signin-input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 12px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-
-
-  .signin-btn {
-    background-color: #0c8a00;
-    color: white;
-    padding: 10px;
-    width: 100%;
-    border: none;
-    margin-top: 20px;
-    border-radius: 5px;
-    font-weight: bold;
-    cursor: pointer;
-  }
-
-  .signin-right {
-    flex: 1;
-    background-color: #c2e3a4;
-   
-   
-  }
-
-  .signin-right img {
+.auth-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
-  }
-  
+}
 
-  .forgot-password-container {
-  margin-top: 10px;
-  text-align: center; /* Center the link horizontally */
+.back-arrow {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #555;
+    cursor: pointer;
+    padding: 0.5rem;
+    line-height: 1;
+    transition: color 0.2s;
+}
+.back-arrow:hover {
+    color: #28a745;
+}
+
+.signup-form-box, .signin-form-box, .forgotPassword-form-box {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.signup-title, .signin-title, .forgotPassword-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.google-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1.5rem;
+    background-color: #fff;
+    color: #444;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s, box-shadow 0.2s;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+.google-button:hover {
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.12);
+}
+.google-button img {
+    width: 20px;
+    height: 20px;
+    margin-right: 0.75rem;
+}
+
+.or-divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #aaa;
+    margin: 1.5rem 0;
+    font-size: 0.9rem;
+}
+.or-divider::before,
+.or-divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #eee;
+}
+.or-divider span {
+    padding: 0 1rem;
+}
+
+.error-message, .success-message {
+    padding: 0.8rem 1rem;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    text-align: center;
+}
+.error-message {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+.success-message { /* Though not used in Signin.jsx, kept for completeness if added */
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #555;
+}
+
+.signup-input, .signin-input, .forgotPassword-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1.2rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+.signup-input:focus, .signin-input:focus, .forgotPassword-input:focus {
+    border-color: #28a745;
+    box-shadow: 0 0 0 0.15rem rgba(40, 167, 69, 0.2);
+    outline: none;
+}
+
+.signup-button, .signin-btn, .forgotPassword-btn {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-top: 0.5rem;
+}
+.signup-button:hover, .signin-btn:hover, .forgotPassword-btn:hover {
+    background-color: #218838;
+}
+.signup-button:disabled, .signin-btn:disabled, .forgotPassword-btn:disabled {
+    background-color: #a3d9b1;
+    cursor: not-allowed;
+}
+
+
+.auth-switch-link {
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    color: #555;
+}
+.auth-switch-link a {
+    color: #28a745;
+    font-weight: 500;
+    text-decoration: none;
+}
+.auth-switch-link a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 900px) {
+    .signup-right, .signin-right, .forgotPassword-right {
+        display: none;
+    }
+    .signup-left, .signin-left, .forgotPassword-left {
+        flex-basis: 100%;
+        max-width: 100%;
+        padding: 2rem 1.5rem;
+        box-shadow: none;
+    }
+    .signup-form-box, .signin-form-box, .forgotPassword-form-box {
+        max-width: 450px;
+    }
+}
+
+@media (max-width: 480px) {
+    .signup-title, .signin-title, .forgotPassword-title {
+        font-size: 1.6rem;
+    }
+    .signup-left, .signin-left, .forgotPassword-left {
+        padding: 1.5rem 1rem;
+    }
+    .google-button, 
+    .signup-input, .signin-input, .forgotPassword-input,
+    .signup-button, .signin-btn, .forgotPassword-btn {
+        font-size: 0.9rem;
+        padding: 0.7rem 0.8rem;
+    }
+}
+/* --- End of Common Auth Page Styles --- */
+
+
+/* Specific styles for Signin page */
+.forgot-password-container {
+    text-align: right; /* Align "Forgot Password?" to the right */
+    margin-top: -0.8rem; /* Pull it up slightly below the password field */
+    margin-bottom: 1.5rem; /* Space before Sign In button */
 }
 
 .forgot-password-link {
-  color: #0078d7; /* Style the link color (a typical blue for links) */
-  text-decoration: none; /* Remove the default underline */
-  font-size: 14px; /* Make the link text a bit smaller, adjust as needed */
+    font-size: 0.85rem;
+    color: #007bff; /* Blue for forgot password, or use Sapra Green */
+    text-decoration: none;
 }
-
 .forgot-password-link:hover {
-  text-decoration: underline; /* Add underline on hover for better user feedback */
+    text-decoration: underline;
 }
-  
- 
-  
- 
-
-
-  

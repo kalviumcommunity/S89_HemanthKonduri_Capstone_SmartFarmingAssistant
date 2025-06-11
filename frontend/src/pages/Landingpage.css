@@ -13,11 +13,27 @@
     overflow-x: hidden;
   }
   
+
+  
+  .logo {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  height: auto;  /* allow it to adjust based on content */
+  width: auto;
+}
+
+.logo img {
+  width: 70px;
+  height: 60px;
+  margin-right: 15px;
+}
+
   .get-started-container {
     position: relative;
     width: 100vw;
     height: 100vh;
-   
+    background-image: url('../assets/backgroundimg.png');
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -82,14 +98,7 @@
     text-decoration: underline;
   }
   
-  .lang-select {
-    padding: 8px 12px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    background-color: transparent;
-    color: #000000;
-    cursor: pointer;
-  }
+ 
   
   /* Main content */
   .main-content {
