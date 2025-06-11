@@ -27,8 +27,6 @@ const userSchema = mongoose.Schema({
       return !this.googleId;
     },
   },
-
-  
   walletBalance: {
     type: Number,
     required: true,

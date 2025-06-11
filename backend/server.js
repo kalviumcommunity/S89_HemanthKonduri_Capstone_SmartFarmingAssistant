@@ -11,14 +11,10 @@ const multer = require('multer');
 const config = require('./config/env.config'); 
 const connectDB = require('./config/db.config');
 
-// === FIX #1: LOAD PASSPORT STRATEGY ON STARTUP ===
-// By requiring this file here, the passport.use() code inside it will execute,
-// configuring the Google Strategy for the entire application.
-// This is the main reason your app was crashing or failing.
-require('./controllers/googleAuthControllers.js');
-// =================================================
 
-// Import ALL Routers
+require('./controllers/googleAuthControllers.js');
+
+
 const chatRoutes = require('./routes/chatRoutes');
 const marketRoutes = require('./routes/marketRoutes');
 
@@ -28,15 +24,14 @@ const userRoutes = require('./routes/userRoutes.js');
 const orderRoutes = require('./routes/orderRoutes.js');
 
 
-// Import data module
+
 const dataModule = require('./data.js');
 
 const app = express();
 
-// Connect to Database
 connectDB();
 
-// CORS setup
+
 app.use(
   cors({
     origin: function (origin, callback) {
