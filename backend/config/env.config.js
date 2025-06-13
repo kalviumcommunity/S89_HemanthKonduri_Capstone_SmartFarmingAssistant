@@ -4,6 +4,7 @@ dotenv.config(); // Load .env file
 
 const config = {
     port: process.env.PORT || 5000,
+    pexelsApiKey: process.env.PEXELS_API_KEY,
     mongodbUri: process.env.MONGODB_URI,
     sessionSecret: process.env.SESSION_SECRET,
     geminiApiKey: process.env.GEMINI_API_KEY,

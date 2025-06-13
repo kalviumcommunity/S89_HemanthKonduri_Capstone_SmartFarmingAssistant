@@ -19,12 +19,12 @@ router.get(
     failureRedirect: `${FRONTEND_URL}/signin?error=google-auth-failed`,
     session: true, // Session is required for the passport OAuth flow
   }),
-  googleAuthCallbackHandler // Our custom handler
+  googleAuthCallbackHandler 
 );
 
 router.post("/signup", signup);
 router.post("/signin", signin);
-router.get("/get-user/:id", getUser); // Consider protecting this route
+router.get("/get-user/:id", getUser); 
 router.put("/forgot-password", forgotPassword);
 
 module.exports = router;
