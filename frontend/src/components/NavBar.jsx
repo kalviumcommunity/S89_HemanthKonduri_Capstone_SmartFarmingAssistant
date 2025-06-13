@@ -1,135 +1,92 @@
-// frontend/src/NavBar.jsx
+// src/components/NavBar.jsx (The Correct, Final Version)
+
 import React, { useState, useRef, useEffect } from 'react';
-import { useNavigate, Link } from 'react-router-dom'; // Use Link for navigation
-import './NavBar.css';
-import mySapraLogo from '../assets/mySapraLogo.png'; // Adjust the path
+import { useNavigate, Link, NavLink } from 'react-router-dom';
+import './NavBar.css'; // This will now correctly style the component
+import mySapraLogo from '../assets/mySapraLogo.png';
+import { useAuth } from '../contexts/AuthContext'; // Using the central auth state
 
 const NavBar = () => {
-  const navigate = useNavigate();
-  const [currentUser, setCurrentUser] = useState(null);
-  const [showDropdown, setShowDropdown] = useState(false);
-  const dropdownRef = useRef(null);
+    const { user, logout } = useAuth(); // Get user and logout function from context
+    const navigate = useNavigate();
+    const [showDropdown, setShowDropdown] = useState(false);
+    const dropdownRef = useRef(null);
 
-  useEffect(() => {
-    // Check for logged-in user on component mount and on storage change
-    const checkAuth = () => {
-      const token = localStorage.getItem('authToken');
-      const storedUser = localStorage.getItem('currentUser');
-      if (token && storedUser) {
-        try {
-          setCurrentUser(JSON.parse(storedUser));
-        } catch (e) {
-          console.error("Error parsing stored user data:", e);
-          // Clear invalid data
-          localStorage.removeItem('authToken');
-          localStorage.removeItem('currentUser');
-          setCurrentUser(null);
-        }
-      } else {
-        setCurrentUser(null);
-      }
-    };
-
-    checkAuth(); // Initial check
-
-    // Listen for storage changes (e.g., from other tabs, though less common for SPAs)
-    window.addEventListener('storage', checkAuth);
-    return () => window.removeEventListener('storage', checkAuth);
-  }, []);
-
-  // This effect can be used to react to currentUser changes if needed elsewhere,
-  // or if you want to redirect if user becomes null after being logged in.
-  // For now, just logging for demonstration.
-  // useEffect(() => {
-  //   if (currentUser) {
-  //     console.log("User is logged in:", currentUser);
-  //   } else {
-  //     console.log("User is logged out or not logged in.");
-  //   }
-  // }, [currentUser]);
-
-
-  const toggleDropdown = () => {
-    setShowDropdown(prev => !prev);
-  };
-
-  const handleLogout = () => {
-    localStorage.removeItem('authToken');
-    localStorage.removeItem('currentUser');
-    setCurrentUser(null); // Update state
-    setShowDropdown(false); // Close dropdown
-    alert("You have been logged out.");
-    navigate('/'); // Navigate to home or sign-in page
-  };
-
-  // Close dropdown on outside click
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+    const handleLogout = () => {
+        logout();
         setShowDropdown(false);
-      }
+        navigate('/');
     };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
 
-  // Default avatar if user.avatar is null or empty
-  const defaultAvatar = "https://www.gstatic.com/images/branding/product/1x/avatar_circle_blue_512dp.png";
+    // Effect to close the dropdown when clicking outside of it
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setShowDropdown(false);
+            }
+        };
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, []);
 
-  
- 
+    const defaultAvatar = "https://cdn-icons-png.flaticon.com/512/3135/3135715.png";
 
-  return (
-    <div>
-      <nav className="navbar">
-        <Link to="/" className="logo-link"> {/* Use Link for logo navigation */}
-          <div className="logo">
-            <img src={mySapraLogo} alt="MySapra Logo"/>
-          </div>
-        </Link>
+    return (
+        // Use the correct "navbar-modern" class
+        <nav className="navbar-modern">
+            <Link to={user ? "/homepage" : "/"} className="navbar-logo-link">
+                <img src={mySapraLogo} alt="MySapra Logo" className="navbar-logo-img" />
+                <span>MySapra</span>
+            </Link>
 
-        <div className="nav-links"> {/* Group navigation links */}
-          <Link to="/homepage" className="nav-btn">Home</Link>
-          <Link to="/marketprices" className="nav-btn">Market Prices</Link>
-          <Link to="/chatwindows" className="nav-btn">AI-Chat</Link>
-          <Link to="/diseasedetection" className="nav-btn">Disease-Detection</Link> {/* Assuming a route */}
-          <Link to="/store" className="nav-btn">Sapra Store</Link>
-        </div>
-      
-
-        <div className="nav-right">
-          {currentUser ? (
-            <div className="profile-container" ref={dropdownRef}>
-              <div className="profile-icon" onClick={toggleDropdown} title="Profile and options">
-                <img
-                  src={currentUser.avatar || defaultAvatar}
-                  alt={currentUser.name || "Profile"}
-                  onError={(e) => e.target.src = defaultAvatar} // Fallback for broken avatar links
-                />
-              </div>
-
-              {showDropdown && (
-                <div className="profile-dropdown">
-                  <div className="dropdown-user-info">
-                    <strong>{currentUser.name}</strong>
-                    <small>{currentUser.email}</small>
-                  </div>
-                  <hr className="dropdown-divider" />
-              
-                  <button onClick={handleLogout} className="dropdown-logout-btn">Logout</button>
+            {user && (
+                <div className="navbar-links">
+                    <NavLink to="/homepage" className="navbar-link">Home</NavLink>
+                    <NavLink to="/diseasedetection" className="navbar-link">Disease Detection</NavLink>
+                    <NavLink to="/chatwindows" className="navbar-link">AI Assistant</NavLink>
+                    <NavLink to="/market-prices" className="navbar-link">Market</NavLink>
+                    <NavLink to="/store" className="navbar-link">Store</NavLink>
                 </div>
-              )}
+            )}
+
+            <div className="navbar-right">
+                {user ? (
+                    // Use the correct "profile-menu" class
+                    <div className="profile-menu" ref={dropdownRef}>
+                        {/* Use the correct "profile-button" class */}
+                        <button onClick={() => setShowDropdown(!showDropdown)} className="profile-button">
+                            <img
+                                src={user.avatar || defaultAvatar}
+                                alt={user.name}
+                                onError={(e) => e.target.src = defaultAvatar}
+                            />
+                        </button>
+
+                        {showDropdown && (
+                            <div className="profile-dropdown">
+                                <div className="dropdown-header">
+                                    <p className="dropdown-name">{user.name}</p>
+                                    <p className="dropdown-email">{user.email}</p>
+                                </div>
+                                <div className="dropdown-divider"></div>
+                                <button onClick={handleLogout} className="logout-button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+                                        <path fillRule="evenodd" d="M7.5 3.75A1.5 1.5 0 006 5.25v13.5a1.5 1.5 0 001.5 1.5h6a1.5 1.5 0 001.5-1.5V15a.75.75 0 011.5 0v3.75a3 3 0 01-3 3h-6a3 3 0 01-3-3V5.25a3 3 0 013-3h6a3 3 0 013 3V9A.75.75 0 0115 9V5.25a1.5 1.5 0 00-1.5-1.5h-6zm10.72 4.72a.75.75 0 011.06 0l3 3a.75.75 0 010 1.06l-3 3a.75.75 0 11-1.06-1.06l1.72-1.72H9a.75.75 0 010-1.5h10.94l-1.72-1.72a.75.75 0 010-1.06z" clipRule="evenodd" />
+                                    </svg>
+                                    <span>Logout</span>
+                                </button>
+                            </div>
+                        )}
+                    </div>
+                ) : (
+                    <div className="auth-buttons">
+                        <Link to="/signin" className="navbar-button signin">Sign In</Link>
+                        <Link to="/signup" className="navbar-button signup">Sign Up</Link>
+                    </div>
+                )}
             </div>
-          ) : (
-            <div className="auth-buttons">
-              <Link to="/signin" className="nav-btn signin-link-nav">Sign In</Link>
-              {/* <Link to="/signup" className="nav-btn signup-link-nav">Sign Up</Link> */}
-            </div>
-          )}
-        </div>
-      </nav>
-    </div>
-  );
+        </nav>
+    );
 };
 
 export default NavBar;
