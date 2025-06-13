@@ -1,18 +1,6 @@
 /* HomePage.css - Updated for new layout */
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-}
 
-body,
-html {
-  height: 100%; /* This might be an issue if you want scrolling beyond viewport height */
-  width: 100%;
-  /* Consider removing height: 100% if it restricts scrolling */
-}
 
 .homepage-container {
   display: flex;

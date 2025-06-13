@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { sendMessageToBackend } from '../contexts/chatService';
 import './ChatWindow.css';
+import NavBar from '../components/NavBar';
 
 // --- Polished SVG Icons (Corrected for Styling) ---
 const NewChatIcon = () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 5v14M5 12h14"/></svg>;
@@ -53,6 +54,7 @@ const ChatWindow = () => {
   return (
     <div className="cw-page-container">
         {/* === The Floating Chat Button at the bottom right === */}
+        <NavBar/>
         <div className="cw-floating-action-button" onClick={() => { /* In a real app, this would open a popup or navigate */ }}>
             <FloatingChatIcon />
         </div>

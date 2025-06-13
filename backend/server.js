@@ -7,57 +7,35 @@ const cors = require('cors');
 const path = require('path');
 const multer = require('multer');
 
-// Load configurations
+
 const config = require('./config/env.config');
 const connectDB = require('./config/db.config');
+require('./controllers/googleAuthControllers.js'); // Initializes Google Passport strategy
 
-require('./controllers/googleAuthControllers.js');
-
-// --- Your Route Imports ---
+// --- Route Imports ---
+const authRoutes = require('./routes/authRoute.js');
 const chatRoutes = require('./routes/chatRoutes');
 const diseaseRoutes = require('./routes/diseaseRoutes.js');
 
-const authRoutes = require('./routes/authRoute.js');
-
-
-// --- Data Generator and Module Imports ---
-
-// THIS IS THE MOST IMPORTANT PART FOR THIS FILE.
-// It correctly points to the 'controllers' folder and pulls 'generateData' from the exported object.
-
-
-
-
 const app = express();
 
-// --- Initialize Database and Generate Mock Data ---
+// --- Initialize Database ---
 connectDB();
 
-
+// --- Core Middleware ---
 app.use(
   cors({
-    origin: function (origin, callback) {
-      if (!origin && config.nodeEnv !== 'production') {
-        return callback(null, true);
-      }
-      if (Array.isArray(config.clientURLs) && config.clientURLs.includes(origin)) {
-        callback(null, true);
-      } else if (!origin) {
-        callback(null, true);
-      } else {
-        callback(new Error(`Not allowed by CORS. Origin: ${origin}`));
-      }
-    },
+    origin: config.clientURLs, // Use the array from config for flexibility
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
   })
 );
 
-// Standard Middleware
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// Session setup
+// --- Session & Authentication Middleware ---
 app.use(
   session({
     secret: config.sessionSecret,
@@ -70,65 +48,54 @@ app.use(
     }
   })
 );
-
-// Initialize Passport and session
 app.use(passport.initialize());
 app.use(passport.session());
 
-// --- MOUNT YOUR ROUTES ---
-app.use('/api/users', authRoutes);
-app.use('/api/disease', diseaseRoutes);
+
+// --- API Routes ---
 app.get('/api/health', (req, res) => {
   res.status(200).json({ status: 'UP', timestamp: new Date().toISOString() });
 });
-app.get('/api/categories', (req, res) => {
-  try {
-    res.json(dataModule.categoriesFromData);
-  } catch (error) {
-    console.error("Error fetching categories:", error);
-    res.status(500).json({ message: "Error fetching categories" });
-  }
-});
 
+app.use('/api/users', authRoutes);
 app.use('/api/chat', chatRoutes);
+app.use('/api/disease', diseaseRoutes);
 
 
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+// --- Base Route ---
 app.get('/', (req, res) => {
   res.send(`Server is running in ${config.nodeEnv} mode.`);
 });
 
-// Not Found and Global Error Handlers (Unchanged)
+
+// --- Error Handling Middleware (Keep at the end) ---
+// 404 Not Found Handler
 app.use((req, res, next) => {
     const error = new Error(`Not Found - ${req.originalUrl}`);
     error.status = 404;
     next(error);
 });
+
+// Global Error Handler
 app.use((err, req, res, next) => {
     console.error("Global Error Handler:", err.message);
     if (config.nodeEnv === 'development') {
         console.error(err.stack);
     }
+    
     if (err instanceof multer.MulterError) {
-        return res.status(400).json({ error: `File upload error: ${err.message}` });
+        return res.status(400).json({ success: false, message: `File upload error: ${err.message}` });
     }
-    if (err.message === 'Not an image! Please upload an image file.') {
-        return res.status(400).json({ error: err.message });
-    }
+
     const statusCode = err.status || 500;
     res.status(statusCode).json({
-        error: err.message || 'An unexpected internal server error occurred.',
+        success: false,
+        message: err.message || 'An unexpected internal server error occurred.',
     });
 });
 
+
+// --- Start Server ---
 app.listen(config.port, () => {
   console.log(`Server running on port ${config.port} in ${config.nodeEnv} mode`);
-  if (!config.geminiApiKey || config.geminiApiKey.startsWith("YOUR_")) {
-    console.warn(
-      "\n***********************************************************************\n" +
-      "WARNING: GEMINI_API_KEY is not set correctly or is a placeholder.\n" +
-      "AI features might not work as expected.\n" +
-      "***********************************************************************\n"
-    );
-  }
 });
