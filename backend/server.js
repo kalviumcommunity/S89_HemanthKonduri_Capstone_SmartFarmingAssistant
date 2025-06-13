@@ -8,27 +8,28 @@ const path = require('path');
 const multer = require('multer');
 
 // Load configurations
-const config = require('./config/env.config'); 
+const config = require('./config/env.config');
 const connectDB = require('./config/db.config');
-
 
 require('./controllers/googleAuthControllers.js');
 
-
+// --- Your Route Imports ---
 const chatRoutes = require('./routes/chatRoutes');
-const marketRoutes = require('./routes/marketRoutes');
 
 const authRoutes = require('./routes/authRoute.js');
-const productRoutes = require('./routes/productRoutes.js');
-const userRoutes = require('./routes/userRoutes.js');
-const orderRoutes = require('./routes/orderRoutes.js');
+
+
+// --- Data Generator and Module Imports ---
+
+// THIS IS THE MOST IMPORTANT PART FOR THIS FILE.
+// It correctly points to the 'controllers' folder and pulls 'generateData' from the exported object.
 
 
 
-const dataModule = require('./data.js');
 
 const app = express();
 
+// --- Initialize Database and Generate Mock Data ---
 connectDB();
 
 
@@ -74,7 +75,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // --- MOUNT YOUR ROUTES ---
-
 app.use('/api/users', authRoutes);
 app.get('/api/health', (req, res) => {
   res.status(200).json({ status: 'UP', timestamp: new Date().toISOString() });
@@ -87,11 +87,9 @@ app.get('/api/categories', (req, res) => {
     res.status(500).json({ message: "Error fetching categories" });
   }
 });
-app.use('/api/products', productRoutes);
-app.use('/api/users', userRoutes);
-app.use('/api/orders', orderRoutes);
+
 app.use('/api/chat', chatRoutes);
-app.use('/api/market-data', marketRoutes);
+
 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.get('/', (req, res) => {
