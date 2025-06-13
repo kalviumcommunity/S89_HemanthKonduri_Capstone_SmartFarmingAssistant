@@ -15,6 +15,7 @@ require('./controllers/googleAuthControllers.js');
 
 // --- Your Route Imports ---
 const chatRoutes = require('./routes/chatRoutes');
+const diseaseRoutes = require('./routes/diseaseRoutes.js');
 
 const authRoutes = require('./routes/authRoute.js');
 
@@ -76,6 +77,7 @@ app.use(passport.session());
 
 // --- MOUNT YOUR ROUTES ---
 app.use('/api/users', authRoutes);
+app.use('/api/disease', diseaseRoutes);
 app.get('/api/health', (req, res) => {
   res.status(200).json({ status: 'UP', timestamp: new Date().toISOString() });
 });

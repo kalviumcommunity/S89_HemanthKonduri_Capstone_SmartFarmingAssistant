@@ -10,6 +10,7 @@ import ForgotPassword from './pages/forgotPassword';
 
 
 import ChatWindow from './pages/ChatWindow.jsx';
+import DiseaseDetectionPage from './pages/DiseaseDetectionPage.jsx';
 
 
 function App() {
@@ -26,7 +27,7 @@ function App() {
         <Route path='/google-callback' element={<GoogleCallback/>}/>
         <Route path='/forgotPassword' element={<ForgotPassword/>}/>
         <Route path='/chatwindows' element={<ChatWindow/>}/>
-     
+        <Route path='/diseasedetection' element={<DiseaseDetectionPage/>}/>
       </Routes>
     
   )
