@@ -1,246 +1,161 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import './MarketPricesPage.css';
+// src/pages/MarketPricesPage.jsx (UPDATED HTML STRUCTURE)
+
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import NavBar from '../components/NavBar';
-
-
-// --- Reusable Components (can be broken into separate files later) ---
-// ... (rest of your MarketPricesPage.js code from your paste) ...
-
-const SearchIcon = () => <svg className="mp-search-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>;
-const LocationIcon = () => <svg className="mp-location-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"></path></svg>;
-const ClockIcon = () => <svg className="mp-clock-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"></path></svg>;
-
-const CropCard = ({ crop, onSelect, isSelected }) => {
-    const isPriceUp = crop.priceChangePercent >= 0;
-    const priceChangeClass = isPriceUp ? 'mp-price-up' : 'mp-price-down';
-    const arrow = isPriceUp ? '▲' : '▼';
-
-    return (
-        <div className={`mp-crop-card ${isSelected ? 'selected' : ''}`} onClick={() => onSelect(crop)}>
-            <img src={crop.image} alt={crop.cropName} className="mp-crop-card-image" />
-            <div className="mp-crop-card-info">
-                <h4 className="mp-crop-card-name">{crop.cropName}</h4>
-                <p className="mp-crop-card-variety">{crop.variety}</p>
-                <div className="mp-crop-card-price-details">
-                    <p className="mp-crop-card-price">₹{crop.currentPrice.toFixed(2)}<span className="mp-crop-card-unit">/{crop.unit}</span></p>
-                    <p className={`mp-crop-card-change ${priceChangeClass}`}>
-                        {arrow} {Math.abs(crop.priceChangePercent).toFixed(1)}%
-                    </p>
-                </div>
-            </div>
-        </div>
-    );
-};
-
-const PriceTrendGraph = ({ selectedCrop }) => {
-    if (!selectedCrop || !selectedCrop.priceHistory || selectedCrop.priceHistory.length === 0) {
-        return <div className="mp-price-trend-placeholder"><p>Select a crop to see its 7-day price trend.</p></div>;
-    }
-    const history = selectedCrop.priceHistory;
-    const prices = history.map(h => h.price);
-    const maxPriceValue = Math.max(...prices);
-    const minPriceValue = Math.min(...prices);
-    const graphMinY = Math.max(0, minPriceValue - (maxPriceValue - minPriceValue) * 0.1); 
-    const graphMaxY = maxPriceValue + (maxPriceValue - minPriceValue) * 0.1; 
-
-    const getDayLabel = (dateString) => new Date(dateString).toLocaleDateString(undefined, { weekday: 'short' });
-
-    return (
-        <div className="mp-price-trend-graph-section">
-            <h3 className="mp-section-title">Price Trend: {selectedCrop.cropName} ({selectedCrop.variety})</h3>
-            <p className="mp-graph-market-info">Last 7 days in {selectedCrop.marketName}</p>
-            <div className="mp-graph-area">
-                <div className="mp-graph-y-axis">
-                    <span>₹{graphMaxY.toFixed(0)}</span>
-                    <span>₹{((graphMaxY + graphMinY) / 2).toFixed(0)}</span>
-                    <span>₹{graphMinY.toFixed(0)}</span>
-                </div>
-                <div className="mp-graph-bars-container">
-                    {history.map((day, index) => {
-                        const range = graphMaxY - graphMinY;
-                        const barHeightPercent = range > 0 ? ((day.price - graphMinY) / range) * 100 : 0;
-                        return (
-                            <div key={index} className="mp-graph-bar-item">
-                                <div className="mp-graph-bar" style={{ height: `${Math.max(0, Math.min(100,barHeightPercent))}%` }} title={`₹${day.price.toFixed(2)}`}>
-                                    <span className="mp-bar-value-tooltip">₹{day.price.toFixed(0)}</span>
-                                </div>
-                                <div className="mp-graph-day-label">{getDayLabel(day.date)}</div>
-                            </div>
-                        );
-                    })}
-                </div>
-            </div>
-        </div>
-    );
-};
-
+import MarketPriceCard from '../components/MarketPriceCard';
+import CropCard from '../components/CropCard';
+import '../styles/MarketPrices.css';
 
 const MarketPricesPage = () => {
-    const [allMarkets, setAllMarkets] = useState([]);
-    const [searchTerm, setSearchTerm] = useState('');
-    const [selectedMarket, setSelectedMarket] = useState(null);
-    const [selectedCropForGraph, setSelectedCropForGraph] = useState(null);
-    const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const [allCrops, setAllCrops] = useState([]);
+    const [allStates, setAllStates] = useState([]);
+    const [selectedCropId, setSelectedCropId] = useState('');
+    const [selectedState, setSelectedState] = useState('');
+    const [searchResults, setSearchResults] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [searching, setSearching] = useState(false);
+    const [error, setError] = useState('');
 
     useEffect(() => {
-        const fetchMarketData = async () => {
-            setIsLoading(true);
-            setError(null);
+        const fetchInitialData = async () => {
+            setLoading(true);
             try {
-                // Ensure backend is running on port 5000 or update this URL
-                const response = await fetch('http://localhost:5000/api/market-data/ap-markets'); // Updated path based on server.js change
-                if (!response.ok) {
-                    const errorData = await response.text(); // Try to get more error info
-                    throw new Error(`HTTP error! status: ${response.status}, message: ${errorData}`);
-                }
-                const data = await response.json();
-                setAllMarkets(data);
-                if (data && data.length > 0) {
-                    setSelectedMarket(data[0]); 
-                    if (data[0].crops && data[0].crops.length > 0) {
-                        setSelectedCropForGraph(data[0].crops[0]);
-                    }
-                }
-            } catch (e) {
-                console.error("Failed to fetch market data:", e);
-                setError(`Failed to load market data: ${e.message}. Please try again later.`);
+                const [cropsResponse, trendsResponse] = await Promise.all([
+                    axios.get('/api/crop-price/all-crops'),
+                    axios.get(`/api/crop-price/trends/1`)
+                ]);
+                setAllCrops(cropsResponse.data);
+                const uniqueStates = [...new Set(trendsResponse.data.map(t => t.market.state))].sort();
+                setAllStates(uniqueStates);
+            } catch (err) {
+                setError('Failed to load initial data. Please refresh.',err);
             } finally {
-                setIsLoading(false);
+                setLoading(false);
             }
         };
-        fetchMarketData();
+        fetchInitialData();
     }, []);
 
-    const filteredMarkets = useMemo(() => {
-        if (!searchTerm.trim()) return allMarkets;
-        const lowerSearch = searchTerm.toLowerCase();
-        return allMarkets.filter(market =>
-            market.name.toLowerCase().includes(lowerSearch) ||
-            market.town.toLowerCase().includes(lowerSearch) ||
-            market.district.toLowerCase().includes(lowerSearch)
-        );
-    }, [allMarkets, searchTerm]);
-
-    const handleMarketSelect = (market) => {
-        setSelectedMarket(market);
-        if (market.crops && market.crops.length > 0) {
-            setSelectedCropForGraph(market.crops[0]); 
-        } else {
-            setSelectedCropForGraph(null);
+    const handleSearch = async (e) => {
+        e.preventDefault();
+        if (!selectedCropId || !selectedState) return alert('Please select both a crop and a state.');
+        setSearching(true);
+        setError('');
+        setSearchResults(null);
+        try {
+            const { data } = await axios.get(`/api/crop-price/trends/${selectedCropId}`);
+            const stateResults = data.filter(trend => trend.market.state === selectedState);
+            setSearchResults(stateResults);
+        } catch (err) {
+            setError('Could not fetch price data.',err);
+        } finally {
+            setSearching(false);
         }
     };
 
-    const handleCropSelectForGraph = (crop) => {
-        setSelectedCropForGraph(crop);
-    };
-
-    if (isLoading) {
-        return <div className="mp-loading-state">Loading market data... Please wait.</div>;
-    }
-    if (error) {
-        return <div className="mp-error-state">Error: {error}</div>;
-    }
-
     return (
         <>
-       <NavBar/>
-        <div className="mp-page-container">
-            
-            <aside className="mp-sidebar">
-                <div className="mp-sidebar-header">
-                    <span className="mp-app-logo">🌿</span>
-                    <h2>AP Market Prices</h2>
+            <NavBar />
+            {/* The main container with max-width for header and search form */}
+            <div className="market-page-container">
+                <header className="market-header">
+                    <h1>Crop Market Prices</h1>
+                    <p>Search directly for prices or explore popular crops below.</p>
+                </header>
+                <div className="search-form-container">
+                    <form onSubmit={handleSearch} className="search-filters">
+                        <select value={selectedState} onChange={(e) => setSelectedState(e.target.value)} disabled={loading}>
+                            <option value="">-- Select State --</option>
+                            {allStates.map(state => <option key={state} value={state}>{state}</option>)}
+                        </select>
+                        <select value={selectedCropId} onChange={(e) => setSelectedCropId(e.target.value)} disabled={loading}>
+                            <option value="">-- Select Crop --</option>
+                            {allCrops.map(crop => <option key={crop.id} value={crop.id}>{crop.name}</option>)}
+                        </select>
+                        <button type="submit" disabled={searching || !selectedCropId || !selectedState}>
+                            {searching ? 'Searching...' : 'Search Prices'}
+                        </button>
+                    </form>
                 </div>
-                <div className="mp-market-selector-area">
-                    <div className="mp-search-bar-wrapper">
-                        <SearchIcon />
-                        <input
-                            type="text"
-                            className="mp-search-input"
-                            placeholder="Search market by name or town..."
-                            value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
-                        />
-                    </div>
-                    <div className="mp-market-list">
-                        {filteredMarkets.length > 0 ? filteredMarkets.map(market => (
-                            <button
-                                key={market.id}
-                                className={`mp-market-list-item ${selectedMarket?.id === market.id ? 'selected' : ''}`}
-                                onClick={() => handleMarketSelect(market)}
-                            >
-                                <h4>{market.name}</h4>
-                                <p>{market.town}, {market.district}</p>
-                            </button>
-                        )) : <p className="mp-no-results">No markets found matching "{searchTerm}".</p>}
-                    </div>
-                </div>
-                <footer className="mp-sidebar-footer">
-                    <p>AgriData © {new Date().getFullYear()}</p>
-                </footer>
-            </aside>
+                {error && <div className="error-message">{error}</div>}
+            </div> {/* End of market-page-container for header/search */}
 
-            <main className="mp-main-content">
-                {!selectedMarket && allMarkets.length > 0 && ( // Show only if markets loaded but none selected
-                    <div className="mp-welcome-message">
-                        <h2>Welcome!</h2>
-                        <p>Select a market from the left to view detailed crop prices and trends.</p>
+            {/* New wrapper for content that should span full width */}
+            <div className="full-width-content-wrapper"> {/* NEW WRAPPER */}
+                {searching ? (
+                    <div className="loader">Fetching prices...</div>
+                ) : searchResults !== null ? (
+                    <div className="search-results-container">
+                        <h2>Search Results</h2>
+                        <div className="market-price-list">
+                            {searchResults.length > 0 ? (
+                                searchResults.map(trend => <MarketPriceCard key={trend.market.id} marketData={trend} />)
+                            ) : (
+                                <p className="no-results-message">No market data found for this selection.</p>
+                            )}
+                        </div>
                     </div>
-                )}
-                {!selectedMarket && allMarkets.length === 0 && !isLoading && !error && (
-                     <div className="mp-welcome-message">
-                        <h2>No Market Data Available</h2>
-                        <p>Could not load any market data at this time.</p>
-                    </div>
-                )}
-                {selectedMarket && (
-                    <div className="mp-market-details-view">
-                        <header className="mp-selected-market-info">
-                            <h1>{selectedMarket.name}</h1>
-                            <p className="mp-market-address"><LocationIcon /> {selectedMarket.address}</p>
-                            <div className="mp-market-meta">
-                                <span><ClockIcon /> {selectedMarket.timings}</span>
+                ) : (
+                    <div className="initial-crop-grid-container">
+                        <h2>Explore Crops</h2>
+                        {loading ? (
+                            <div className="loader">Loading crops...</div>
+                        ) : (
+                            <div className="crop-grid">
+                                {allCrops.map(crop => <CropCard key={crop.id} crop={crop} />)}
                             </div>
-                        </header>
-
-                        <section className="mp-crops-display-section">
-                            <h2 className="mp-section-title">Crop Prices in Market</h2>
-                            {selectedMarket.crops && selectedMarket.crops.length > 0 ? (
-                                <div className="mp-crop-scroller">
-                                    {selectedMarket.crops.map(crop => (
-                                        <CropCard
-                                            key={crop.id}
-                                            crop={crop}
-                                            onSelect={handleCropSelectForGraph}
-                                            isSelected={selectedCropForGraph?.id === crop.id}
-                                        />
-                                    ))}
-                                </div>
-                            ) : <p className="mp-no-results">No crop data available for this market.</p>}
-                        </section>
-
-                        {selectedCropForGraph && <PriceTrendGraph selectedCrop={selectedCropForGraph} />}
-                        {!selectedCropForGraph && selectedMarket.crops && selectedMarket.crops.length > 0 && (
-                            <div className="mp-price-trend-placeholder"><p>Select a crop above to see its price trend.</p></div>
                         )}
-
-
-                        <section className="mp-farmer-tips-section">
-                            <h2 className="mp-section-title">Farmer's Corner</h2>
-                            <div className="mp-tips-grid">
-                                <div className="mp-tip-card"><h4>🌱 Soil Health</h4><p>Regular soil testing can significantly improve yield. Consider organic manures.</p></div>
-                                <div className="mp-tip-card"><h4>💧 Water Management</h4><p>Explore drip irrigation or sprinklers for efficient water use, especially for cash crops.</p></div>
-                                <div className="mp-tip-card"><h4>☀️ Weather Advisory</h4><p>Stay updated with local weather forecasts to plan irrigation and harvesting.</p></div>
-                                <div className="mp-tip-card"><h4>💰 Market Links</h4><p>Connect with local traders or FPOs for better price realization.</p></div>
-                            </div>
-                        </section>
                     </div>
                 )}
-            </main>
+
+                <footer className="home-footer">
+                <div className="footer-container">
+        {/* Column 1 */}
+        <div className="footer-column">
+          <h3>Smart Farming Assistant</h3>
+          <p>
+            Empowering farmers with technology – from AI tools to real-time
+            support.
+          </p>
         </div>
+
+        {/* Column 2 */}
+        <div className="footer-column">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/market-prices">Market Prices</a></li>
+            <li><a href="/ai-chat">AI Chat</a></li>
+            <li><a href="/products">Products</a></li>
+          </ul>
+        </div>
+
+        {/* Column 3 */}
+        <div className="footer-column">
+          <h4>Contact Us</h4>
+          <p>Email: support@smartfarming.com</p>
+          <p>Phone: +91 98765 43210</p>
+          <p>Location: Rajahmundry, India</p>
+        </div>
+
+        {/* Column 4 */}
+        <div className="footer-column">
+          <h4>Follow Us</h4>
+          <div className="social-icons">
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384005.png" alt="Facebook" /></a>
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384017.png" alt="Twitter" /></a>
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384012.png" alt="Instagram" /></a>
+          </div>
+        </div>
+      </div>
+
+      <div className="footer-bottom">
+        <p>&copy; 2025 Smart Farming Assistant. All rights reserved.</p>
+      </div>
+            </footer>
+            </div> {/* End of full-width-content-wrapper */}
         </>
     );
 };
-
 export default MarketPricesPage;

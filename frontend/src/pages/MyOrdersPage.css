@@ -1,68 +1,65 @@
-.my-orders-container {
-    padding: 2rem 0;
+.my-orders-page {
+    max-width: 900px;
+    margin: 2rem auto;
 }
-.my-orders-container h1 {
+
+.my-orders-page h1 {
     text-align: center;
     margin-bottom: 2rem;
 }
-.no-orders {
-    text-align: center;
-    padding: 3rem;
-    background: #f9f9f9;
-    border-radius: 8px;
-}
+
 .orders-list {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
 }
+
 .order-card {
-    border: 1px solid #ddd;
+    background: #fff;
     border-radius: 8px;
-    background: white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    padding: 1.5rem;
+    cursor: pointer;
+    transition: box-shadow 0.3s;
 }
-.order-header {
+.order-card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+.order-card-header {
     display: flex;
     justify-content: space-between;
-    background: #f7f7f7;
-    padding: 1rem 1.5rem;
-    border-bottom: 1px solid #ddd;
-    border-radius: 8px 8px 0 0;
-}
-.order-header > div {
-    display: flex;
-    flex-direction: column;
-}
-.order-label {
-    font-size: 0.8rem;
-    color: #777;
-    font-weight: 500;
-}
-.order-body {
-    padding: 1.5rem;
-}
-.order-body h4 {
-    margin-top: 0;
-    margin-bottom: 1.5rem;
-    color: #2c5c3d;
-}
-.order-item-detail {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #eee;
     margin-bottom: 1rem;
-}
-.order-item-detail img {
-    width: 75px;
-    height: 75px;
-    object-fit: cover;
-    border-radius: 4px;
-}
-.item-name {
-    font-weight: bold;
-    margin: 0;
-}
-.item-qty {
     color: #555;
-    margin: 0.25rem 0 0 0;
 }
+
+.order-card-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.order-card-items-preview img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid white;
+    margin-left: -15px;
+    object-fit: cover;
+}
+
+.order-card-items-preview img:first-child {
+    margin-left: 0;
+}
+
+.order-card-details {
+    text-align: right;
+}
+
+.status-Processing {
+    color: #f4a261;
+    font-weight: bold;
+}
+/* Add other status classes as needed, e.g., .status-Delivered { color: #2a9d8f; } */

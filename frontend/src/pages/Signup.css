@@ -1,231 +1,85 @@
-/* frontend/src/Signup.css */
+/* --- FONTS & THEME VARIABLES (SHARED) --- */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Merriweather:wght@400;700&display=swap');
 
-/* --- Common Auth Page Styles (can be extracted to AuthForm.css) --- */
-.signup-container, .signin-container, .forgotPassword-container { /* General container for the whole page */
-    display: flex;
-    min-height: 100vh; /* Full viewport height */
-    width: 100%;
-    background-color: #f4f6f8; /* Light background for the page */
-    overflow: hidden; /* Prevent scrollbars from slight overflows if any */
+:root {
+    --font-heading: 'Merriweather', serif;
+    --font-body: 'Lato', sans-serif;
+    --color-primary: #588157;
+    --color-primary-dark: #3A5A40;
+    --color-accent: #BC6C25;
+    --color-light-bg: #FCF8F3;
+    --color-text: #333d29;
+    --color-error: #9e2a2b;
 }
 
-.signup-left, .signin-left, .forgotPassword-left { /* Form side */
-    flex: 1 1 550px; /* Flex-grow, flex-shrink, flex-basis */
-    max-width: 550px; /* Max width for the form column */
-    background-color: #ffffff;
-    padding: 2.5rem 3rem; /* Generous padding */
+/* --- MAIN CONTAINER & BACKGROUND (SHARED) --- */
+.signup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 2rem;
+    box-sizing: border-box;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://images.unsplash.com/photo-1444930694458-01babf71870c?q=80&w=2070&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/* --- FORM BOX STYLING (SHARED) --- */
+.signup-form-box {
+    width: 100%;
+    max-width: 450px;
+    padding: 2.5rem 3rem;
+    border-radius: 16px;
+    background-color: rgba(252, 248, 243, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Center form vertically */
-    position: relative; /* For back arrow positioning */
-    box-shadow: 5px 0 15px rgba(0, 0, 0, 0.05); /* Subtle shadow on the right */
+    gap: 1.25rem;
 }
 
-.signup-right, .signin-right, .forgotPassword-right { /* Image side */
-    flex: 1 1 60%; /* Takes up remaining space */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #e9ecef; /* Slightly different background for image side */
-    overflow: hidden; /* Clip image if it's too large */
-}
+/* --- FORM TEXT (SHARED) --- */
+.signup-title { font-family: var(--font-heading); font-size: 2.25rem; font-weight: 700; color: var(--color-primary-dark); text-align: center; margin: 0; }
+.signup-subtitle { font-family: var(--font-body); font-size: 1rem; color: var(--color-text); text-align: center; margin-top: -10px; margin-bottom: 10px; }
 
-.auth-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Cover the area, might crop */
-}
+/* --- INPUTS & LABELS (SHARED) --- */
+label { font-family: var(--font-body); font-weight: 700; font-size: 0.9rem; color: var(--color-primary-dark); margin-bottom: -12px; }
+.signup-input { font-family: var(--font-body); width: 100%; padding: 14px 16px; background-color: #fff; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem; box-sizing: border-box; transition: all 0.2s ease-in-out; }
+.signup-input::placeholder { color: #999; }
+.signup-input:focus { outline: none; border-color: var(--color-primary); box-shadow: 0 0 0 3px rgba(88, 129, 87, 0.3); }
 
-.back-arrow {
-    position: absolute;
-    top: 2rem;
-    left: 2rem;
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: #555;
-    cursor: pointer;
-    padding: 0.5rem;
-    line-height: 1;
-    transition: color 0.2s;
-}
-.back-arrow:hover {
-    color: #28a745; /* Sapra Green */
-}
+/* --- BUTTONS (PARTIALLY SHARED) --- */
+.signup-button { width: 100%; padding: 16px; border: none; border-radius: 8px; background-color: var(--color-primary); color: white; font-size: 1.1rem; font-weight: 700; font-family: var(--font-body); cursor: pointer; transition: background-color 0.2s, transform 0.1s; }
+.signup-button:hover { background-color: var(--color-primary-dark); }
+.signup-button:active { transform: scale(0.98); }
 
-.signup-form-box, .signin-form-box, .forgotPassword-form-box { /* The actual form content box */
-    width: 100%;
-    max-width: 400px; /* Max width of the form itself */
-    margin: 0 auto; /* Center the form box within the left column if column is wider */
-}
+/* --- SIGNUP-SPECIFIC STYLES --- */
+.google-button { display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; padding: 14px; border: 1px solid #ccc; border-radius: 8px; background-color: #fff; color: var(--color-text); font-size: 1rem; font-weight: 700; font-family: var(--font-body); cursor: pointer; transition: background-color 0.2s ease-in-out; }
+.google-button:hover { background-color: #f7f7f7; }
+.google-button img { width: 20px; height: 20px; }
 
-.signup-title, .signin-title, .forgotPassword-title {
-    font-size: 2rem; /* Large title */
-    font-weight: 700;
-    color: #333;
-    margin-bottom: 1.5rem;
-    text-align: center;
-}
+.or-divider { display: flex; align-items: center; text-align: center; color: #999; font-family: var(--font-body); font-weight: 700; font-size: 0.9rem; }
+.or-divider::before, .or-divider::after { content: ''; flex: 1; border-bottom: 1px solid #ddd; }
+.or-divider:not(:empty)::before { margin-right: .75em; }
+.or-divider:not(:empty)::after { margin-left: .75em; }
 
-.google-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    padding: 0.75rem 1rem;
-    margin-bottom: 1.5rem;
-    background-color: #fff;
-    color: #444;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    font-size: 0.95rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background-color 0.2s, box-shadow 0.2s;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-}
-.google-button:hover {
-    background-color: #f9f9f9;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.12);
-}
-.google-button img {
-    width: 20px;
-    height: 20px;
-    margin-right: 0.75rem;
-}
+/* --- LINKS (SHARED) --- */
+.signup-redirect-link { text-align: center; font-family: var(--font-body); font-size: 0.95rem; }
+.signup-redirect-link a { color: var(--color-accent); font-weight: 700; text-decoration: none; transition: text-decoration 0.2s; }
+.signup-redirect-link a:hover { text-decoration: underline; }
 
-.or-divider {
-    display: flex;
-    align-items: center;
-    text-align: center;
-    color: #aaa;
-    margin: 1.5rem 0; /* Space around divider */
-    font-size: 0.9rem;
-}
-.or-divider::before,
-.or-divider::after {
-    content: '';
-    flex: 1;
-    border-bottom: 1px solid #eee;
-}
-.or-divider span {
-    padding: 0 1rem; /* Space around "Or" text */
-}
+/* --- UTILITIES (SHARED) --- */
+.back-arrow { position: absolute; top: 25px; left: 25px; font-size: 2rem; font-weight: bold; color: var(--color-light-bg); cursor: pointer; text-shadow: 0 1px 3px rgba(0,0,0,0.5); transition: transform 0.2s; }
+.back-arrow:hover { transform: scale(1.1); }
+.error-message { background-color: rgba(158, 42, 43, 0.1); color: var(--color-error); border: 1px solid var(--color-error); padding: 12px; border-radius: 8px; text-align: center; font-family: var(--font-body); font-weight: 700; }
 
-.error-message, .success-message { /* Shared error/success message styling */
-    padding: 0.8rem 1rem;
-    margin-bottom: 1rem;
-    border-radius: 5px;
-    font-size: 0.9rem;
-    text-align: center;
+/* --- RESPONSIVE DESIGN (SHARED) --- */
+@media (max-width: 500px) {
+    .signup-form-box { padding: 2rem 1.5rem; }
+    .signup-title { font-size: 2rem; }
+    .back-arrow { top: 20px; left: 20px; }
 }
-.error-message {
-    background-color: #f8d7da;
-    color: #721c24;
-    border: 1px solid #f5c6cb;
-}
-.success-message {
-    background-color: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
-}
-
-
-label {
-    display: block;
-    margin-bottom: 0.4rem;
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: #555;
-}
-
-.signup-input, .signin-input, .forgotPassword-input { /* Shared input styling */
-    width: 100%;
-    padding: 0.75rem 1rem;
-    margin-bottom: 1.2rem; /* Space below each input */
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 1rem;
-    box-sizing: border-box; /* Include padding and border in width/height */
-    transition: border-color 0.2s, box-shadow 0.2s;
-}
-.signup-input:focus, .signin-input:focus, .forgotPassword-input:focus {
-    border-color: #28a745; /* Sapra Green */
-    box-shadow: 0 0 0 0.15rem rgba(40, 167, 69, 0.2);
-    outline: none;
-}
-
-.signup-button, .signin-btn, .forgotPassword-btn { /* Shared main action button */
-    width: 100%;
-    padding: 0.8rem 1rem;
-    background-color: #28a745; /* Sapra Green */
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-size: 1.05rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.2s;
-    margin-top: 0.5rem; /* Space above button if fields are stacked */
-}
-.signup-button:hover, .signin-btn:hover, .forgotPassword-btn:hover {
-    background-color: #218838; /* Darker Sapra Green */
-}
-.signup-button:disabled, .signin-btn:disabled, .forgotPassword-btn:disabled {
-    background-color: #a3d9b1; /* Lighter green for disabled */
-    cursor: not-allowed;
-}
-
-
-.auth-switch-link {
-    text-align: center;
-    margin-top: 1.5rem;
-    font-size: 0.9rem;
-    color: #555;
-}
-.auth-switch-link a {
-    color: #28a745; /* Sapra Green */
-    font-weight: 500;
-    text-decoration: none;
-}
-.auth-switch-link a:hover {
-    text-decoration: underline;
-}
-
-
-/* Responsive adjustments for auth forms */
-@media (max-width: 900px) { /* When screen is too small for two columns */
-    .signup-right, .signin-right, .forgotPassword-right {
-        display: none; /* Hide image column */
-    }
-    .signup-left, .signin-left, .forgotPassword-left {
-        flex-basis: 100%; /* Form takes full width */
-        max-width: 100%;
-        padding: 2rem 1.5rem; /* Adjust padding for smaller screen */
-        box-shadow: none; /* Remove shadow if it's full width */
-    }
-    .signup-form-box, .signin-form-box, .forgotPassword-form-box {
-        max-width: 450px; /* Can be slightly wider if full page */
-    }
-}
-
-@media (max-width: 480px) { /* Smaller mobile screens */
-    .signup-title, .signin-title, .forgotPassword-title {
-        font-size: 1.6rem;
-    }
-    .signup-left, .signin-left, .forgotPassword-left {
-        padding: 1.5rem 1rem;
-    }
-    .google-button, 
-    .signup-input, .signin-input, .forgotPassword-input,
-    .signup-button, .signin-btn, .forgotPassword-btn {
-        font-size: 0.9rem;
-        padding: 0.7rem 0.8rem;
-    }
-}
-/* --- End of Common Auth Page Styles --- */
-
-
-/* Specific styles for Signup if any (mostly covered by common) */
-/* Example: if signup button was different color */
-/* .signup-button { background-color: #007bff; } */
-/* .signup-button:hover { background-color: #0056b3; } */

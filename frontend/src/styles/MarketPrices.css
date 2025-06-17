@@ -1,0 +1,111 @@
+/* src/styles/MarketPrices.css (Final Version with Grid for Market Details) */
+
+/* --- Page & Header --- */
+.market-page-container { max-width: 1300px; margin: 0 auto; padding: 2rem; }
+.market-header { text-align: center; margin-bottom: 2.5rem; }
+.market-header h1 { font-size: 2.8rem; color: #2c3e50; font-weight: 700; margin-bottom: 0.5rem; }
+.market-header p { font-size: 1.2rem; color: #7f8c8d; }
+
+/* --- Beautiful Search Form --- */
+.search-form-container { background: #ffffff; padding: 2rem; border-radius: 16px; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08); margin-bottom: 3rem; }
+.search-filters { display: grid; grid-template-columns: 1fr 1fr auto; gap: 1.5rem; align-items: center; }
+.search-filters select { padding: 0.9rem 1.2rem; font-size: 1rem; border-radius: 10px; border: 2px solid #dfe6e9; background-color: #f8f9fa; appearance: none; background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e"); background-position: right 0.7rem center; background-repeat: no-repeat; background-size: 1.5em 1.5em; }
+.search-filters button { padding: 0.9rem 2rem; font-size: 1rem; border-radius: 10px; background-color: #27ae60; color: white; font-weight: 600; cursor: pointer; border: 2px solid #27ae60; }
+
+/* --- Content Wrapper & Section Headers --- */
+.market-content-wrapper { display: block; width: 100%; margin-top: 3rem; }
+.search-results-container, .initial-crop-grid-container { width: 100%; }
+.search-results-container h2, .initial-crop-grid-container h2 { font-size: 1.8rem; color: #34495e; margin-bottom: 1.5rem; padding-bottom: 0.75rem; border-bottom: 1px solid #dfe6e9; }
+.no-results-message { text-align: center; color: #7f8c8d; padding: 3rem; background: #ffffff; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); grid-column: 1 / -1; }
+
+/* --- Crop Card Grid (For main page) --- */
+.crop-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.75rem;
+}
+
+/* --- Market Price List (THE MAIN FIX for Detail/Search Page) --- */
+.market-price-list {
+    display: grid;
+    /* This will create 2 columns on larger screens, and 1 on smaller screens */
+    grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+    gap: 1.5rem;
+}
+
+/* --- Beautiful Crop Card --- */
+.crop-card-link { text-decoration: none; color: inherit; }
+.crop-card { position: relative; border-radius: 16px; overflow: hidden; height: 240px; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.crop-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12); }
+.crop-card-image { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+.crop-card:hover .crop-card-image { transform: scale(1.1); }
+.crop-card-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 1.5rem 1rem; background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent 80%); }
+.crop-card-name { color: white; font-size: 1.25rem; font-weight: 600; text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6); }
+
+/* --- Detail Page Header --- */
+.detail-header { text-align: left; border-bottom: 1px solid #dfe6e9; padding-bottom: 1.5rem; }
+.back-link { display: inline-flex; align-items: center; gap: 0.5rem; color: #3498db; text-decoration: none; font-weight: 600; margin-bottom: 1rem; }
+.state-selector-container { margin-top: 1rem; }
+.state-selector-container label { font-weight: 600; margin-right: 1rem; color: #34495e; }
+.state-selector-container select { padding: 0.6rem 1rem; font-size: 1rem; border-radius: 8px; border: 1px solid #bdc3c7; }
+
+/* --- Market Price Card --- */
+.market-price-card {
+    background: #fff;
+    border: 1px solid #dfe6e9;
+    border-radius: 12px;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    /* This makes each card a flex container to manage its own content */
+    display: flex;
+    flex-direction: column;
+}
+.market-price-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+.market-price-main {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1rem;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+}
+.market-info { display: flex; align-items: center; gap: 1rem; }
+.market-icon { color: #3498db; font-size: 1.5rem; }
+.market-name { font-weight: 600; color: #2c3e50; }
+.state-name { font-size: 0.9rem; color: #7f8c8d; }
+.price-trend-info { display: flex; align-items: center; gap: 1rem; justify-content: flex-end; }
+.price-change { display: flex; align-items: center; gap: 0.3rem; font-weight: 700; font-size: 1rem; }
+.text-green-500 { color: #27ae60; }
+.text-red-500 { color: #e74c3c; }
+.text-gray-500 { color: #95a5a6; }
+.price-info { text-align: right; }
+.current-price { font-size: 1.25rem; font-weight: 700; color: #2c3e50; display: flex; align-items: center; gap: 0.25rem; }
+.price-unit { font-size: 0.9rem; color: #7f8c8d; }
+.toggle-icon { color: #bdc3c7; font-size: 1.2rem; justify-self: end; }
+
+/* --- Chart --- */
+.price-history-chart-container {
+    padding: 1rem;
+    border-top: 1px solid #f0f0f0;
+    margin-top: auto; /* Pushes chart to the bottom of the card */
+    background-color: #fcfcfc;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+.chart-title { font-size: 1rem; color: #34495e; margin-bottom: 1rem; text-align: center; }
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 1024px) {
+    /* On medium screens, force market price list to a single column */
+    .market-price-list {
+        grid-template-columns: 1fr;
+    }
+}
+@media (max-width: 768px) {
+    .search-filters { grid-template-columns: 1fr; }
+    .market-price-main { grid-template-columns: 1fr auto; }
+    .toggle-icon { grid-row: 1; grid-column: 2; }
+    .price-trend-info { grid-column: 1 / -1; justify-content: flex-start; margin-top: 0.5rem; }
+}

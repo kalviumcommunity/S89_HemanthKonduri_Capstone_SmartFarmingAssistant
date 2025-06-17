@@ -1,0 +1,46 @@
+.category-row {
+    margin-bottom: 4rem;
+}
+
+.category-row h2 {
+    font-size: 2rem;
+    color: #264653;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #e9c46a;
+    display: inline-block;
+}
+
+.product-scroll-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.5rem;
+}
+
+
+/* In Store.css (or CategoryRow.css) */
+.category-row {
+    margin-bottom: 2rem; /* Add space between the two rows of the same category */
+}
+
+/* This is the container for a single row of products */
+.product-scroll-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.5rem;
+}
+
+/* In Store.css (or StoreHomePage.css) */
+/* This is the new container for the heading + two rows */
+.category-section {
+    margin-bottom: 4rem; /* Space between different categories */
+}
+
+.category-section h2 {
+    font-size: 2rem;
+    color: #264653;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #e9c46a;
+    display: inline-block;
+}

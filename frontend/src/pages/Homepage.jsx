@@ -11,28 +11,28 @@ const bannerFeatures = [
     {
         title: "Real-Time Market Prices",
         description: "Stay ahead with instant access to current market prices for your crops, fertilizers, and tools. Make informed selling and buying decisions.",
-        imageUrl: "https://i.pinimg.com/736x/33/db/be/33dbbe844878b2431492eceba380fd1f.jpg", // Placeholder
+        imageUrl: "https://sdmntpreastus.oaiusercontent.com/files/00000000-50ec-61f9-983c-f3b22ac9814d/raw?se=2025-06-16T10%3A27%3A50Z&sp=r&sv=2024-08-04&sr=b&scid=f72aa3e2-a997-548b-8a29-08b0f3842220&skoid=31bc9c1a-c7e0-460a-8671-bf4a3c419305&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-06-15T20%3A56%3A02Z&ske=2025-06-16T20%3A56%3A02Z&sks=b&skv=2024-08-04&sig=45gW2PgSEf6ogc3qqC85C0X46LjGFP0SM4c7EDr8GEI%3D", // Placeholder
         altText: "Market Prices Chart",
-        link: "/marketprices" // Example link
+        link: "/marketprices" 
     },
     {
         title: "AI-Powered Disease Detection",
         description: "Identify plant diseases quickly and accurately using our advanced AI-powered image analysis. Protect your crops and prevent losses.",
-        imageUrl: "https://lh3.googleusercontent.com/gg-dl/AJfQ9KQqdTYpShj5pX8c8vm59P6_HDKb1LnI2O8eBlcsQ6jqmv4Zn3Sj1zVmZh3uymvkcOSln0XD3jRfP1WTq2GFMZmIntKQEoYrWTW1K2AgZHUflt_BuPgU7K2FbXwsBZgQOYFoIVWnOjAR4GkR9f-nezEGSk5iuLo29oNKQBIJpepvvdOs9g=s1024?authuser=1", // Placeholder
+        imageUrl: "https://sdmntpreastus.oaiusercontent.com/files/00000000-3f40-61f9-a71b-ec7fb34ea015/raw?se=2025-06-16T10%3A31%3A02Z&sp=r&sv=2024-08-04&sr=b&scid=70fa45ce-1d17-53ee-b28f-53427d4ca6ea&skoid=31bc9c1a-c7e0-460a-8671-bf4a3c419305&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-06-15T20%3A57%3A27Z&ske=2025-06-16T20%3A57%3A27Z&sks=b&skv=2024-08-04&sig=20iVGg0OCyUpULlHmw9ZtSAh4kFMgshmsFu9xQ7m4OQ%3D", // Placeholder
         altText: "Plant with disease highlighted by AI",
-        link: "/disease-detection" // Example link
+        link: "/disease-detection"
     },
     {
         title: "24/7 Smart Farming Assistant",
         description: "Get instant support and expert advice anytime with our AI-powered chatbot. Ask questions about farming practices, crop care, and more.",
-        imageUrl: "https://images.unsplash.com/photo-1551843009-b587955a5435?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8YWklMjBjaGF0Ym90JTIwZmFybWluZ3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=1200&q=60", // Placeholder
+        imageUrl: "https://sdmntpreastus.oaiusercontent.com/files/00000000-b024-61f9-a93c-1f6f00ce6dbb/raw?se=2025-06-16T10%3A41%3A21Z&sp=r&sv=2024-08-04&sr=b&scid=47749a57-c57f-5c08-8bf2-234245cb8825&skoid=31bc9c1a-c7e0-460a-8671-bf4a3c419305&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-06-16T08%3A58%3A59Z&ske=2025-06-17T08%3A58%3A59Z&sks=b&skv=2024-08-04&sig=jBxw1YW52vCN%2BPsFRGF8Zh71wsPQ1QZzqkjdcAaYYsg%3D", // Placeholder
         altText: "Farmer using AI Chatbot on a tablet",
-        link: "/chatwindows" // Example link
+        link: "/chatwindows" 
     },
     {
         title: "SAPRA Store",
         description: "Shop for high-quality farming supplies at competitive prices from verified vendors. Fertilizers, tools, and more.",
-        imageUrl: "https://images.unsplash.com/photo-1586769020540-750b6dfe21ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8ZmFybWluZyUyMHN1cHBsaWVzfGVufDB8fDB8fHww&auto=format&fit=crop&w=1200&q=60", // Placeholder
+        imageUrl: "https://sdmntprcentralus.oaiusercontent.com/files/00000000-e878-61f5-a643-a47daec6a564/raw?se=2025-06-16T10%3A51%3A20Z&sp=r&sv=2024-08-04&sr=b&scid=176962d3-9507-5883-9f16-75de12b7cd5f&skoid=31bc9c1a-c7e0-460a-8671-bf4a3c419305&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-06-15T20%3A57%3A30Z&ske=2025-06-16T20%3A57%3A30Z&sks=b&skv=2024-08-04&sig=soNogaTN5JsMMH0aoGayREDQD58Lo0/XtSEeF9WaszM%3D", // Placeholder
         link: "/saprastore"
     }
 ];
@@ -156,10 +156,49 @@ const HomePage = () => {
 
 
             <footer className="home-footer">
-                <div className="container">
-                    
-                    <p>© {new Date().getFullYear()} Sapra Store. All Rights Reserved.</p>
-                </div>
+                <div className="footer-container">
+        {/* Column 1 */}
+        <div className="footer-column">
+          <h3>Smart Farming Assistant</h3>
+          <p>
+            Empowering farmers with technology – from AI tools to real-time
+            support.
+          </p>
+        </div>
+
+        {/* Column 2 */}
+        <div className="footer-column">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/market-prices">Market Prices</a></li>
+            <li><a href="/ai-chat">AI Chat</a></li>
+            <li><a href="/products">Products</a></li>
+          </ul>
+        </div>
+
+        {/* Column 3 */}
+        <div className="footer-column">
+          <h4>Contact Us</h4>
+          <p>Email: support@smartfarming.com</p>
+          <p>Phone: +91 98765 43210</p>
+          <p>Location: Rajahmundry, India</p>
+        </div>
+
+        {/* Column 4 */}
+        <div className="footer-column">
+          <h4>Follow Us</h4>
+          <div className="social-icons">
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384005.png" alt="Facebook" /></a>
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384017.png" alt="Twitter" /></a>
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384012.png" alt="Instagram" /></a>
+          </div>
+        </div>
+      </div>
+
+      <div className="footer-bottom">
+        <p>&copy; 2025 Smart Farming Assistant. All rights reserved.</p>
+      </div>
             </footer>
         </div>
     );

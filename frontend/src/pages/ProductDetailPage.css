@@ -1,0 +1,91 @@
+.product-detail-page {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    padding: 3rem 1rem;
+}
+
+.product-detail-image img {
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.product-detail-info .category-tag {
+    background-color: #e9c46a;
+    color: #264653;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.product-detail-info h1 {
+    font-size: 2.5rem;
+    color: #264653;
+    margin: 1rem 0;
+}
+
+.product-detail-info .description {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #555;
+    margin-bottom: 1.5rem;
+}
+
+.product-detail-info .rating {
+    font-size: 1.2rem;
+    color: #f4a261;
+    margin-bottom: 1.5rem;
+}
+
+.price-section {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.price-section .current-price {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #2a9d8f;
+}
+
+.price-section .original-price {
+    font-size: 1.5rem;
+    text-decoration: line-through;
+    color: #aaa;
+}
+
+.discount-badge {
+    background-color: #e76f51;
+    color: white;
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.stock {
+    font-size: 1rem;
+    color: #28a745;
+    font-weight: 500;
+    margin-bottom: 2rem;
+}
+
+.add-to-cart-btn {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    background-color: #2a9d8f;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.add-to-cart-btn:hover {
+    background-color: #264653;
+}

@@ -1,0 +1,111 @@
+.order-detail-page {
+    max-width: 900px;
+    margin: 2rem auto;
+}
+
+.order-detail-header {
+    background: #f8f9fa;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+.order-timeline {
+    display: flex;
+    justify-content: space-between;
+    margin: 3rem 0;
+    position: relative;
+}
+
+.order-timeline::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    right: 10%;
+    height: 4px;
+    background-color: #eee;
+    transform: translateY(-50%);
+    z-index: -1;
+}
+
+.timeline-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    text-align: center;
+}
+
+.timeline-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #eee;
+    color: #aaa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    transition: background-color 0.4s;
+    border: 4px solid #fff; /* Creates space between line and icon */
+    z-index: 1;
+}
+
+.timeline-step.active .timeline-icon {
+    background-color: #2a9d8f;
+    color: white;
+}
+
+.order-detail-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+    align-items: flex-start;
+}
+
+.order-items-section h3, .order-summary-section h3 {
+    margin-bottom: 1rem;
+}
+
+.order-item-detail-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    background: #fff;
+    padding: 1rem;
+    border-radius: 8px;
+}
+.order-item-detail-card img {
+    width: 80px;
+    height: 80px;
+    border-radius: 4px;
+}
+.order-item-detail-card div {
+    flex-grow: 1;
+}
+.order-item-detail-card p {
+    margin: 0;
+}
+
+.order-summary-section {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 8px;
+    position: sticky;
+    top: 120px;
+}
+.order-summary-section p {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.8rem;
+}
+.order-summary-section hr {
+    margin: 1rem 0;
+    border: none;
+    border-top: 1px dashed #ccc;
+}

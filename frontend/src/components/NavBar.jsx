@@ -36,7 +36,7 @@ const NavBar = () => {
         <nav className="navbar-modern">
             <Link to={user ? "/homepage" : "/"} className="navbar-logo-link">
                 <img src={mySapraLogo} alt="MySapra Logo" className="navbar-logo-img" />
-                <span>MySapra</span>
+               
             </Link>
 
             {user && (

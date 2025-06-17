@@ -1,0 +1,35 @@
+.price-details-card {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 1.5rem;
+}
+
+.price-details-card h3 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #dee2e6;
+    color: #264653;
+}
+
+.price-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    color: #495057;
+}
+
+.price-row.discount {
+    color: #28a745;
+}
+
+.price-row.total {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #212529;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #dee2e6;
+}

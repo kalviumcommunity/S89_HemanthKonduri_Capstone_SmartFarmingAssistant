@@ -1,82 +1,51 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom';
-import './MyOrdersPage.css';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useStore } from '/src/contexts/StoreContext';
+import './MyOrdersPage.css'; // New CSS
 
 const MyOrdersPage = () => {
-    const [orders, setOrders] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState('');
+    const { userData, loading } = useStore();
     const navigate = useNavigate();
 
-    useEffect(() => {
-        const fetchOrders = async () => {
-            const userInfo = JSON.parse(localStorage.getItem('currentUser'));
-            if (!userInfo || !userInfo.token) {
-                navigate('/signin?redirect=/my-orders');
-                return;
-            }
-
-            try {
-                const config = {
-                    headers: { Authorization: `Bearer ${userInfo.token}` },
-                };
-                const { data } = await axios.get('http://localhost:5000/api/orders/myorders', config);
-                setOrders(data);
-            } catch (err) {
-                setError('Failed to fetch orders.');
-                console.error(err);
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchOrders();
-    }, [navigate]);
-
+    if (loading) return <div className="loader">Loading your orders...</div>;
+    
     return (
-        <div className="my-orders-container">
+        <div className="container my-orders-page">
             <h1>My Orders</h1>
-            {loading ? <div className="loader">Loading...</div> : 
-             error ? <div className="error-message">{error}</div> :
-             orders.length === 0 ? (
-                <div className="no-orders">
-                    <p>You have not placed any orders yet.</p>
-                    <Link to="/saprastore" className="btn-primary">Start Shopping</Link>
-                </div>
-             ) : (
+            {userData.orders.length > 0 ? (
                 <div className="orders-list">
-                    {orders.map(order => (
-                        <div key={order._id} className="order-card">
-                            <div className="order-header">
+                    {userData.orders.map(order => (
+                        <div key={order._id} className="order-card-new" onClick={() => navigate(`/order/${order._id}`)}>
+                            <div className="order-card-header">
                                 <div>
-                                    <span className="order-label">ORDER PLACED</span>
-                                    <span>{new Date(order.createdAt).toLocaleDateString()}</span>
+                                    <h4>Order ID: {order.orderId}</h4>
+                                    <p>Placed on {new Date(order.orderDate).toLocaleDateString()}</p>
                                 </div>
-                                <div>
-                                    <span className="order-label">TOTAL</span>
-                                    <span>₹{order.totalPrice.toFixed(2)}</span>
-                                </div>
-                                <div>
-                                    <span className="order-label">ORDER #</span>
-                                    <span>{order._id}</span>
+                                <div className="order-card-total">
+                                    <span>Total</span>
+                                    <h4>₹{order.priceDetails.finalTotal.toFixed(2)}</h4>
                                 </div>
                             </div>
-                            <div className="order-body">
-                                <h4>Estimated Delivery: {new Date(order.estimatedDelivery).toLocaleDateString()}</h4>
-                                {order.orderItems.map(item => (
-                                    <div key={item.product} className="order-item-detail">
-                                        <img src={item.image} alt={item.name}/>
-                                        <div>
-                                            <p className="item-name">{item.name}</p>
-                                            <p className="item-qty">Qty: {item.qty}</p>
-                                        </div>
-                                    </div>
-                                ))}
+                            <div className="order-card-body">
+                                <div className="order-card-items-preview">
+                                    {order.items.slice(0, 4).map(item => (
+                                        <img key={item.productId} src={item.image} alt={item.name} />
+                                    ))}
+                                </div>
+                                <div className="order-card-status">
+                                    <span className={`status-dot status-${order.status.toLowerCase()}`}></span>
+                                    {order.status}
+                                </div>
                             </div>
                         </div>
                     ))}
                 </div>
-             )}
+            ) : (
+                <div className="empty-orders">
+                    <p>You have not placed any orders yet.</p>
+                    <button onClick={() => navigate('/store')} className="btn-primary">Start Shopping</button>
+                </div>
+            )}
         </div>
     );
 };

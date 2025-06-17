@@ -1,41 +1,35 @@
-/* src/index.css */
-
-/* Use a modern CSS reset and define your font variables here */
 :root {
   --font-primary: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  --text-color: #1a202c;
-  --background-color: #f7fafc; /* A light grey background for the body */
+  --text-color-dark: #2c3e50;
+  --text-color-light: #7f8c8d;
+  --page-background: #f8f9fa;
+  --primary-green: #27ae60;
 }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-family: var(--font-primary); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+body { background-color: var(--page-background); color: var(--text-color-dark); min-height: 100vh; }
+#root { display: flex; flex-direction: column; min-height: 100vh; width: 100%; }
+img, picture, video, canvas, svg { display: block; max-width: 100%; }
+.loader { text-align: center; padding: 2rem; font-weight: 500; color: var(--text-color-light); }
+.error-message { text-align: center; padding: 1rem; margin: 1rem auto; background-color: #fdedec; color: #c0392b; border-radius: 8px; max-width: 600px; }
 
-/* A simple, effective reset */
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+:root {
+  --primary-color: #2a9d8f;
+  --secondary-color: #e9c46a;
+  --bg-color: #f8f9fa;
+  --dark-color: #264653;
+  --light-color: #ffffff;
+  --danger-color: #e76f51;
+  --gray-color: #dee2e6;
 }
-
-html {
-  font-family: var(--font-primary);
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-body {
-  background-color: var(--background-color);
-  color: var(--text-color);
-  min-height: 100vh;
-}
-
-#root {
-  /* This ensures your React app can take up full height if needed */
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  width: 100%;
-}
-
-img, picture, video, canvas, svg {
-  display: block;
-  max-width: 100%;
-}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Segoe UI', 'Roboto', sans-serif; background-color: var(--bg-color); color: var(--dark-color); line-height: 1.6; }
+.container { max-width: 1200px; margin: auto; padding: 0 2rem; }
+a { text-decoration: none; color: var(--primary-color); }
+ul { list-style: none; }
+img { max-width: 100%; }
+.btn { display: inline-block; padding: 0.7rem 1.5rem; border: none; border-radius: 5px; cursor: pointer; font-size: 1rem; transition: background-color 0.3s ease; }
+.btn-primary { background: var(--primary-color); color: var(--light-color); }
+.btn-primary:hover { background: #248a7e; }
+.btn-danger { background: var(--danger-color); color: var(--light-color); }
+.main-content { padding: 1rem 0; min-height: 80vh; }
